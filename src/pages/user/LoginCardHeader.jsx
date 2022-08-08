@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Login.css"
 
-const LoginContent = (props) => {
+const LoginCardHeader = (props) => {
 
     const isLogin = props.isLogin;
 
@@ -13,4 +13,4 @@ const LoginContent = (props) => {
     );
 };
 
-export default LoginContent;
+export default LoginCardHeader;

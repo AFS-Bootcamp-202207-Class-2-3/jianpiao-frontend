@@ -3,13 +3,20 @@ import "./header.css";
 import { Menu, Col, Row, Dropdown, Space } from "antd";
 import { routes, userMenu } from "../../router";
 import { DownOutlined } from "@ant-design/icons";
+import {Link} from "react-router-dom";
+import LoginCard from "../../pages/user/LoginCard";
+import {useSelector} from "react-redux";
 
 const Header = () => {
   const [current, setCurrent] = useState("mail");
 
-  const loginStatus = true; // 登录状态
+    const loginStatus = useSelector((state) => {
+        return state.user.isLoginGlobal;
+    })
 
-  const onClick = (e) => {
+    const [modal2Visible, setModal2Visible] = useState(false);
+
+    const onClick = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
   };
@@ -45,13 +52,15 @@ const Header = () => {
             </Dropdown>
           </div>
         ) : (
-          <div>
-            <span className="login-text">登录</span>
-            <span> / </span>
-            <span className="register-text">注册</span>
+          <div onClick={()=>setModal2Visible(true)}>
+                <span className="login-text" >登录</span>
+                <span> / </span>
+                <span className="register-text">注册</span>
           </div>
         )}
       </Col>
+
+        <LoginCard modal2Visible={modal2Visible} setModal2Visible={setModal2Visible}/>
     </Row>
   );
 };

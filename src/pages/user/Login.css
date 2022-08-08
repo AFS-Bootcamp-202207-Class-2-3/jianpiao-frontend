@@ -20,7 +20,7 @@
 }
 
 div.ant-modal-body {
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     align-items: flex-start;
     font-size: 18px;
@@ -33,7 +33,7 @@ div.ant-modal-body {
 .ant-modal-body input {
     border: none;
     border-bottom: 1px solid gray;
-    width: 300px;
-    margin-left: 20px;
+    /*width: 300px;*/
+    /*margin: 0 20px;*/
     height: 30px;
 }
