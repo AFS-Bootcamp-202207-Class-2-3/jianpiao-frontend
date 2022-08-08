@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from "react-router-dom";
+import OrderPage from '../pages/PersonalCenter/PersonalCenterPage';
 
 const Layout = () => {
   const env = process.env;
@@ -10,6 +11,7 @@ const Layout = () => {
       <nav>
         <Link to="/">Home</Link> |{" "}
         <Link to="/about">About</Link>
+        <OrderPage/>
       </nav>
       <div className="content">
         <Outlet />
