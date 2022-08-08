@@ -1,21 +1,17 @@
-import React from 'react';
-import { Link, Outlet } from "react-router-dom";
-import OrderPage from '../pages/PersonalCenter/PersonalCenterPage';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Footer from "./Footer/";
+import Header from "./Header";
+import "./layout.css";
 
 const Layout = () => {
-  const env = process.env;
   return (
-    <div>
-      <h1>Layout's Todo</h1>
-      <p>{JSON.stringify(env)}</p>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link>
-        <OrderPage/>
-      </nav>
+    <div className="layout">
+      <Header></Header>
       <div className="content">
         <Outlet />
       </div>
+      <Footer></Footer>
     </div>
   );
 };
