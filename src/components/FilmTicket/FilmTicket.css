@@ -7,7 +7,7 @@
   border-width: 1px;
 }
 .item {
-  margin: 0 20px 20px 20px;
+  margin-left: 10px;
 }
 .img {
   align-self: flex-end;

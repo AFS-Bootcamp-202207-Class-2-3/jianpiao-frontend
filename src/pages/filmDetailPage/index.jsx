@@ -1,5 +1,7 @@
-import React from 'react'
-import './FilmDetailPage.css'
+import React from 'react';
+import { Popconfirm, Modal  } from 'antd';
+import './FilmDetailPage.css';
+import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
 export default function FilmDetailPage(props) {
 
@@ -18,10 +20,26 @@ export default function FilmDetailPage(props) {
     score: '测试评分'
   }
 
+  const ticketInfo = {
+    filmName: film.title,
+    hall: "1号放映厅",
+    seat: "1排1坐",
+    date: "2022.08.10",
+    price: 35
+  }
+
+  const tickInfo = () => {
+    Modal.info({
+      title: '票据信息',
+      content: (
+        <div>
+          <FilmTicket ticketInfo={ticketInfo}></FilmTicket>
+        </div>
+      ),
   
-
-
-
+      onOk() {},
+    });
+  };
 
   return (
     <div>
@@ -45,7 +63,15 @@ export default function FilmDetailPage(props) {
             </div>
             <div className='action-buyBtn'>
               <button>想看</button>
-              <button>购票</button>
+              <Popconfirm
+                title="确定购票吗?"
+                onConfirm={tickInfo}
+                placement="right"
+                okText="确定"
+                cancelText="取消"
+              >
+                <button>购票</button>
+              </Popconfirm>
             </div>
             <div className='movie-stats-container'>
               <div className='movie-index'>
