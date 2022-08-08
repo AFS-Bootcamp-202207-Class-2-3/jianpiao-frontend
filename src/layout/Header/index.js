@@ -9,14 +9,13 @@ import "./header.css";
 const Header = () => {
   const [current, setCurrent] = useState("mail");
 
-    const loginStatus = useSelector((state) => {
-        return state.user.isLoginGlobal;
-    })
+  const loginStatus = useSelector((state) => {
+    return state.user.isLoginGlobal;
+  });
 
-    const [modal2Visible, setModal2Visible] = useState(false);
+  const [modal2Visible, setModal2Visible] = useState(false);
 
-    const onClick = (e) => {
-    console.log("click ", e);
+  const clickMenu = (e) => {
     setCurrent(e.key);
   };
 
@@ -32,7 +31,7 @@ const Header = () => {
       <Col className="nav" span={16}>
         <Menu
           mode="horizontal"
-          onClick={onClick}
+          onClick={clickMenu}
           selectedKeys={[current]}
           items={routes}
         />
@@ -51,15 +50,18 @@ const Header = () => {
             </Dropdown>
           </div>
         ) : (
-          <div onClick={()=>setModal2Visible(true)}>
-                <span className="login-text" >登录</span>
-                <span> / </span>
-                <span className="register-text">注册</span>
+          <div onClick={() => setModal2Visible(true)}>
+            <span className="login-text">登录</span>
+            <span> / </span>
+            <span className="register-text">注册</span>
           </div>
         )}
       </Col>
 
-        <LoginCard modal2Visible={modal2Visible} setModal2Visible={setModal2Visible}/>
+      <LoginCard
+        modal2Visible={modal2Visible}
+        setModal2Visible={setModal2Visible}
+      />
     </Row>
   );
 };
