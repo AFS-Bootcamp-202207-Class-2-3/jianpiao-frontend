@@ -1,19 +1,17 @@
 import React from 'react';
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer/';
+import "./layout.css";
 
 const Layout = () => {
-  const env = process.env;
   return (
-    <div>
-      <h1>Layout's Todo</h1>
-      <p>{JSON.stringify(env)}</p>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link>
-      </nav>
+    <div className='layout'>
+      <Header></Header>
       <div className="content">
         <Outlet />
       </div>
+      <Footer></Footer>
     </div>
   );
 };
