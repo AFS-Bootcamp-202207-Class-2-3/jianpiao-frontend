@@ -1,6 +1,5 @@
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./layout/Layout";
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
