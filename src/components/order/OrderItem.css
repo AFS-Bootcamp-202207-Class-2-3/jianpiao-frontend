@@ -1,0 +1,15 @@
+.info {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.card-left {
+  width: 150;
+  height: 200;
+  float:left;
+  position: relative
+}
