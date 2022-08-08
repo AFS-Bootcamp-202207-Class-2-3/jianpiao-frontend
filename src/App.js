@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilmDetailPage from "./pages/filmDetailPage";
 import HomePage from "./pages/HomePage";
+import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route index element={<HomePage />} />
           <Route path="/film" element={<FilmDetailPage />} />
+          <Route path="/myorders" element={<PersonalCenterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

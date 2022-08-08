@@ -1,9 +1,18 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Card } from "antd";
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./OrderItem.css";
 
-const OrderItem = () => {
+const OrderItem = (props) => {
+
+  const {order} = props;
+
+  const [ticket, setTicket] = useState({})
+
+  useEffect(() => {
+    setTicket({...JSON.parse(order.ticket)});
+  }, [order])
+
   return (
     <div>
       <Card
@@ -16,18 +25,18 @@ const OrderItem = () => {
             alt="Not Found"
             width={125}
             height={180}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            src={ticket.posterUrl}
           />
           <div className="text" style={{ textAlign: "center" }}>
-            明日战记
+            {ticket.filmName}
           </div>
         </div>
         <div className="card-mid">
-          <div className="text info">订单编号：21516846846465</div>
+          <div className="text info">订单编号：{order.id}</div>
           <div className="text info">影院：天上人间</div>
-          <div className="text info">座位：7排五座</div>
+          <div className="text info">座位：7排5座</div>
           <div className="text info">放映时间：2022.08.07</div>
-          <div className="text info">总价：60</div>
+          <div className="text info">总价：{ticket.totalPrice}</div>
         </div>
         <div className="card-right">
           <div className="status">已完成</div>
