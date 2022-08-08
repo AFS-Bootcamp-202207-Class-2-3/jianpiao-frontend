@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "./Login.css";
-import {Button, Modal} from 'antd';
+import {Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
 import {loginApi, registerApi} from '../../api/user';

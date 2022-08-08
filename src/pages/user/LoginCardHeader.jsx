@@ -7,7 +7,7 @@ const LoginCardHeader = (props) => {
 
     return (
         <div className='login-header'>
-            <img src={require("./image/ticket.png")} />
+            <img alt="" src={require("./image/ticket.png")} />
             <div>{isLogin ? "登录" : "注册"}</div>
         </div>
     );
