@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import "./header.css";
-import { Menu, Col, Row, Dropdown, Space } from "antd";
-import { routes, userMenu } from "../../router";
 import { DownOutlined } from "@ant-design/icons";
-import {Link} from "react-router-dom";
+import { Col, Dropdown, Menu, Row, Space } from "antd";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import LoginCard from "../../pages/user/LoginCard";
-import {useSelector} from "react-redux";
+import { routes, userMenu } from "../../router";
+import "./header.css";
 
 const Header = () => {
   const [current, setCurrent] = useState("mail");

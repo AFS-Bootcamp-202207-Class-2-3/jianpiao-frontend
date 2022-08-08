@@ -1,17 +1,16 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Card } from "antd";
-import React, { useEffect,useState } from "react";
+import { Button, Card } from "antd";
+import React, { useEffect, useState } from "react";
 import "./OrderItem.css";
 
 const OrderItem = (props) => {
+  const { order } = props;
 
-  const {order} = props;
-
-  const [ticket, setTicket] = useState({})
+  const [ticket, setTicket] = useState({});
 
   useEffect(() => {
-    setTicket({...JSON.parse(order.ticket)});
-  }, [order])
+    setTicket({ ...JSON.parse(order.ticket) });
+  }, [order]);
 
   return (
     <div>
@@ -41,6 +40,15 @@ const OrderItem = (props) => {
         <div className="card-right">
           <div className="status">已完成</div>
           <div style={{ float: "right" }}>2022.08.06 17:00:01</div>
+          <div>
+            <Button
+              type="primary"
+              shape="round"
+              style={{ position: "absolute", bottom: 120, right: 25 }}
+            >
+              查看票据
+            </Button>
+          </div>
           <DeleteOutlined
             style={{
               fontSize: 20,
