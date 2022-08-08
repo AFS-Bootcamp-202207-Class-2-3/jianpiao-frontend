@@ -1,0 +1,107 @@
+.banner {
+    display: flex;
+    width: 100%;
+    min-width: 1200px;
+    height: 366px;
+    background: #483c70 url(./image/banner_bg.png) no-repeat 50%;
+}
+.banner .wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    height: 376px;
+    position: relative;
+}
+
+.banner .wrapper .celeInfo-left {
+    width: 300px;
+    float: left;
+    position: relative;
+    top: 70px;
+    overflow: hidden;
+    z-index: 9;
+}
+
+.celeInfo-left .avatar-shadow, .cinema-left .avatar-shadow {
+    position: relative;
+    margin: 0 30px;
+    width: 240px;
+    height: 330px;
+    padding-bottom: 40px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAAAyAgMAAAAfG76+AAAADFBMVEUAAAAAAAAAAAAAAAA16TeWAAAABHRSTlMOAgoGQ0SIeAAAADpJREFUSMdjGAWjYBRgAasoAAwdFACKbB7VPEI076YAUGbzfwrAqOYRormcAjCANodSAEY1j2oexJoBlx1+yE7RXIIAAAAASUVORK5CYII=) no-repeat bottom;
+}
+.banner .wrapper .celeInfo-right {
+    position: relative;
+    margin-right: 30px;
+    margin-left: 300px;
+    margin-top: 70px;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.movie-brief-container .name {
+    width: 900px;
+    margin-top: 0;
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 700;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 64px;
+    color: #fff;
+}
+
+.celeInfo-left .avatar-shadow .avatar {
+    border: 4px solid #fff;
+    height: 322px;
+    width: 232px;
+}
+.movie-brief-container {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    z-index: 1;
+}
+.movie-brief-container ul {
+    width: 250px;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.movie-brief-container ul li {
+    margin: 12px 0;
+    line-height: 100%;
+}
+.action-buyBtn {
+    position: absolute;
+    bottom: 20px;
+}
+.movie-stats-container {
+    position: absolute;
+    top: 158px;
+    left: 342px;
+}
+
+.movie-stats-container .movie-index {
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.movie-stats-container .movie-index .movie-index-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.container{
+    margin: 50px;
+}

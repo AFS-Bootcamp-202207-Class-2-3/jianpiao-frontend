@@ -1,0 +1,31 @@
+.info {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.card-left {
+  float: left;
+  position: relative;
+}
+
+.card-mid {
+  float: left;
+  height: 200px;
+  margin-left: 100px;
+}
+
+.card-right {
+  width: 300px;
+  height: 150px;
+  float: right;
+}
+
+.status {
+  float: left;
+  margin-top: 75px;
+  font-size: 20px;
+}
