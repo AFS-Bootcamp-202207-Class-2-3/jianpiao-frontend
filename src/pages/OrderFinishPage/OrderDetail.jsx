@@ -1,7 +1,6 @@
 import React from "react";
 import "./OrderDetail.css";
 import { Table } from "antd";
-const { Column } = Table;
 const OrderDetail = (props) => {
   const { address, phone } = props.cinemaInfo;
   const { id, createTime, cinema, state, ticketInfo } = props.orderInfo;
@@ -34,8 +33,9 @@ const OrderDetail = (props) => {
     },
   ];
 
-  const data = seat.map((s) => {
+  const data = seat.map((s, index) => {
     return {
+      key: index,
       filmName: filmName,
       date: date,
       cinema: cinema,
