@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import PickSeat from "../pages/orderPage/PickSeat";
 import Footer from "./Footer/";
 import Header from "./Header";
 import "./layout.css";
@@ -9,7 +10,8 @@ const Layout = () => {
     <div className="layout">
       <Header></Header>
       <div className="content">
-        <Outlet />
+        <PickSeat />
+        {/* <Outlet /> */}
       </div>
       <Footer></Footer>
     </div>
