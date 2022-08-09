@@ -1,29 +1,28 @@
 import React from 'react';
 import { Popconfirm, Modal  } from 'antd';
 import './FilmDetailPage.css';
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect,useState } from 'react';
+import { getFilmById } from '../../api/film';
+import moment from 'moment';
 import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
 export default function FilmDetailPage(props) {
-  let location = useLocation();
   let param = useParams();
 
-  // const { film } = props;
-  // const { title, description, director, producer, release_date, rt_score, people } = film;
+  const [film, setFilm] = useState({});
 
-  const film = {
-    poster: "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/464/h/644",
-    title: '测试电影',
-    introduction: '测试电影描述',
-    duration: '120分钟',
-    director: '测试导演',
-    leadingActor: '测试主演',
-    release_date: '测试上映日期',
-    score: '测试评分'
-  }
+  useEffect(() => {
+    const getFilm = async () => {
+        const res = await getFilmById(param.id);
+        console.log(res);
+        setFilm(res.data.film);
+    };
+    getFilm();
+}, []);
 
   const ticketInfo = {
-    filmName: film.title,
+    filmName: film.filmName,
     hall: "1号放映厅",
     seat: "1排1坐",
     date: "2022.08.10",
@@ -49,18 +48,18 @@ export default function FilmDetailPage(props) {
         <div className='wrapper clearfix'>
           <div className='celeInfo-left'>
             <div className='avatar-shadow'>
-              <img className='avatar' src={film.poster} alt={film.title} />
+              <img className='avatar' src={film.posterUrl} alt={film.filmName} />
             </div>
           </div>
           <div className='celeInfo-right clearfix'>
             <div className='movie-brief-container'>
-              <h1 className='name' >{film.title}</h1>
+              <h1 className='name' >{film.filmName}</h1>
               <ul>
-                <li>时长： {film.duration} </li>
+                <li>时长： {film.duration}  分钟</li>
                 <li>类型：动作 / 冒险 / 喜剧 </li>
                 <li>导演： {film.director}</li>
                 <li>主演： {film.leadingActor} </li>
-                <li>上映时间：{film.release_date}</li>
+                <li>上映时间：{moment(film.releasedTime).format("YYYY-MM-DD")}</li>
               </ul>
             </div>
             <div className='action-buyBtn'>
