@@ -1,9 +1,9 @@
 import api from "./api";
 
-const moduleURL = "order/";
+const moduleURL = "orders";
 
-export const getAllOrdersByUserId = () => {
-  return api.get(moduleURL);
+export const getAllOrdersByUserId = (id) => {
+  return api.get(`user/${id}/${moduleURL}`);
 };
 
 export const insertOrder = (order) => {
@@ -11,6 +11,6 @@ export const insertOrder = (order) => {
 };
 
 export const getOrderById = (id) => {
-  return api.get(`${moduleURL}${id}`);
+  return api.get(`${moduleURL}/${id}`);
 };
 

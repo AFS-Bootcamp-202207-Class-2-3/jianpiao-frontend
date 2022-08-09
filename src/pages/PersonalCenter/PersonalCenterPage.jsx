@@ -8,17 +8,18 @@ const PersonalCenterPage = () => {
   const { TabPane } = Tabs;
   const [orders, setOrders] = useState([]);
 
-  const getOrderById = () => {
-    getAllOrdersByUserId().then((response) => {
-      setOrders([...response.data]);
+  const getOrderById = (userId) => {
+    getAllOrdersByUserId(userId).then((response) => {
+      setOrders([...response.data.data]);
     });
   };
 
-  const onChange = (key)=>{
-    if(key === "2") {
-      getOrderById();
+  const onChange = (key) => {
+    const userId = "1";
+    if (key === "2") {
+      getOrderById(userId);
     }
-  }
+  };
 
   return (
     <div>
@@ -44,7 +45,7 @@ const PersonalCenterPage = () => {
           }
           key="2"
         >
-          <OrderList orders={orders}/>
+          <OrderList orders={orders} />
         </TabPane>
       </Tabs>
     </div>
