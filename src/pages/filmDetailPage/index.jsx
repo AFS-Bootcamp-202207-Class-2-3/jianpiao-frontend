@@ -1,10 +1,12 @@
 import React from 'react';
 import { Popconfirm, Modal  } from 'antd';
 import './FilmDetailPage.css';
+import { useLocation, useParams } from "react-router-dom";
 import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
 export default function FilmDetailPage(props) {
-
+  let location = useLocation();
+  let param = useParams();
 
   // const { film } = props;
   // const { title, description, director, producer, release_date, rt_score, people } = film;

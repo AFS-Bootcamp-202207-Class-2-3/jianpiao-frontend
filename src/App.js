@@ -13,8 +13,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="*" element={<NotFoundPage />} />
           <Route index element={<HomePage />} />
-          <Route path="/film" element={<FilmDetailPage />} />
+          <Route path="/films" element={<FilmDetailPage />} />
           <Route path="/personal" element={<PersonalCenterPage />} />
+          <Route path="/films/:id" element={<FilmDetailPage />} />
+          <Route path="/myorders" element={<PersonalCenterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
