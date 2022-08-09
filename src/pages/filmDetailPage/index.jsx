@@ -7,10 +7,8 @@ import { getFilmById } from '../../api/film';
 import moment from 'moment';
 import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
-export default function FilmDetailPage(props) {
+export default function FilmDetailPage() {
   let param = useParams();
-  console.log(param);
-
 
   const [film, setFilm] = useState({});
 

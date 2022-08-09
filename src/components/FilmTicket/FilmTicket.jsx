@@ -12,7 +12,7 @@ const FilmTicket = (props) => {
             {seat ? <div className="item">座位 : {seat}</div> : ""}
             {date ? <div className="item">日期 : {date}</div> : ""}
             {price ? <div className="item">票价 : ￥{price} </div> : ""}
-            <div className="qrCode"><QRCode value={JSON.stringify(props.tickInfo)} /></div>
+            <div className="qrCode"><QRCode value={JSON.stringify(props.ticketInfo)} /></div>
         </div>
     );
 }
