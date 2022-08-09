@@ -11,6 +11,7 @@ const PickSeat = () => {
     const [price, setPrice] = useState(0);
     const [seatChosen, setSeatChosen] = useState([]);
 
+
     const clickSeat = (e) => {
         let imgStatus = parseInt(e.target.getAttribute("imgstatus"));
         let x = e.target.getAttribute("x");
