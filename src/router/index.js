@@ -1,7 +1,7 @@
 import {
   AppstoreOutlined,
   HomeOutlined,
-  SettingOutlined,
+  SettingOutlined
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -22,12 +22,21 @@ const routes = [
 ];
 
 const userMenu = [
-  getItem(<Link to="/userinfo">个人信息</Link>, "userinfo", <HomeOutlined />),
   getItem(
-    <Link to="/myorders">我的订单</Link>,
+    <Link to="/personal" state={{ activedKey: "1" }}>
+      个人信息
+    </Link>,
+    "userinfo",
+    <HomeOutlined />
+  ),
+  getItem(
+    <Link to="/personal" state={{ activedKey: "2" }}>
+      我的订单
+    </Link>,
     "myorders",
     <AppstoreOutlined />
   ),
 ];
 
 export { routes, userMenu };
+
