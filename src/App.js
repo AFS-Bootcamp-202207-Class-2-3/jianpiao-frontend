@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilmDetailPage from "./pages/filmDetailPage";
 import HomePage from "./pages/HomePage";
 import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
+import CinemaDetailPage from "./pages/CinemaDetailPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/personal" element={<PersonalCenterPage />} />
           <Route path="/films/:id" element={<FilmDetailPage />} />
           <Route path="/myorders" element={<PersonalCenterPage />} />
+          <Route path="/cinemas" element={<CinemaDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -32,7 +32,7 @@ const HomePage = () => {
       };
 
       const clickFilm = (id) => {
-        navigate('/films/'+id);
+        navigate('/film/'+id);
       }
 
     return (

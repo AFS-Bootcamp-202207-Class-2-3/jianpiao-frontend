@@ -9,6 +9,8 @@ import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
 export default function FilmDetailPage(props) {
   let param = useParams();
+  console.log(param);
+
 
   const [film, setFilm] = useState({});
 

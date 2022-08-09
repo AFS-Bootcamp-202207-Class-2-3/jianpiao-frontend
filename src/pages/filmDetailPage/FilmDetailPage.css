@@ -6,7 +6,7 @@
     background: #483c70 url(./image/banner_bg.png) no-repeat 50%;
 }
 .banner .wrapper {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
     height: 376px;
     position: relative;
