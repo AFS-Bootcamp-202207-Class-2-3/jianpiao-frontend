@@ -11,8 +11,10 @@ const PersonalCenterPage = () => {
   const { state } = useLocation();
 
   useEffect(() => {
-    onChange(state.activedKey);
-  }, [state]);
+    (() => {
+      onChange(state.activedKey);
+    })();
+  }, []);
 
   const getOrderById = (userId) => {
     getAllOrdersByUserId(userId).then((response) => {

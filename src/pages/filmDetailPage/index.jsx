@@ -19,7 +19,7 @@ export default function FilmDetailPage(props) {
         setFilm(res.data.film);
     };
     getFilm();
-}, []);
+}, [param.id]);
 
   const ticketInfo = {
     filmName: film.filmName,
@@ -37,7 +37,7 @@ export default function FilmDetailPage(props) {
           <FilmTicket ticketInfo={ticketInfo}></FilmTicket>
         </div>
       ),
-  
+
       onOk() {},
     });
   };
