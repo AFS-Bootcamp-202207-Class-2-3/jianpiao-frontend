@@ -5,7 +5,6 @@ import sold from "../../assets/sold.png";
 import seat_checked from "../../assets/seat-checked.png";
 import { useState } from "react";
 import { getSeats } from "../../api/pickSeat";
-import { SoundTwoTone } from "@ant-design/icons";
 
 const PickSeat = () => {
   let m = 7;
