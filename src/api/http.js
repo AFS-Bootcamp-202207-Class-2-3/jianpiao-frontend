@@ -13,10 +13,10 @@ export const JPApi = (path, method, data, fun) => {
     }
 
     api.request(config).then(resp => {
-        if(resp.data.code !== 200){
+        if (resp.data.code !== 200) {
             message.error(resp.data.msg)
-        }else{
-            fun(resp)
+        } else {
+            if (fun) fun(resp)
         }
     }).catch(e => {
         if (e.response.data.msg !== undefined) {
