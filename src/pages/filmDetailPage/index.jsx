@@ -63,7 +63,7 @@ export default function FilmDetailPage() {
               </ul>
             </div>
             <div className='action-buyBtn'>
-              <button>想看</button>
+              {/* <button>想看</button> */}
               <Popconfirm
                 title="确定购票吗?"
                 onConfirm={tickInfo}

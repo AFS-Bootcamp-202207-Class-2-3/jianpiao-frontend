@@ -4,8 +4,8 @@ import CinemaHeader from './CinemaHeader';
 import FilmsList from './FilmsList';
 import { Col, Row } from "antd";
 import "./cinemaDetailPage.css";
-import banner1 from '../../assets/banner1.jpg';
-import banner2 from '../../assets/banner2.jpg';
+import film1 from '../../assets/film1.jpg';
+import film2 from '../../assets/film2.jpg';
 
 const CinemaDetailPage = () => {
     const [currentFilm, setCurrentFilm] = useState({});
@@ -15,7 +15,7 @@ const CinemaDetailPage = () => {
             director: "谁",
             leadingActor: "古天乐",
             duration: 90,
-            posterUrl: banner1,
+            posterUrl: film1,
             introduction: "高分火爆热映中！古天乐亲任总监制！华语科幻年度震撼巨献！机甲大战外星生物，硬核守护家园！ 未来世界地球污染严重，一枚外太空陨石突如其来，带着外星生命体潘朵拉降临人间，袭击人类。空战部队泰来（古天乐饰）与队长郑重生（刘青云饰）前往执行拯救地球的任务，却遭遇前所未见的怪物袭击，机甲军团与外星异形生物展开超燃大战，千难万难誓死捍卫家园，上演了一场酣畅淋漓的激爽对决。然而，在牺牲队友身上意外发现的神秘信号，让泰来开始思考真相到底是什么，难道真正致命的并不是眼前的一切，而是自己身后迷雾之中一场巨大的阴谋…"
         },
         {
@@ -23,7 +23,7 @@ const CinemaDetailPage = () => {
             director: "谁",
             leadingActor: "沈腾",
             duration: 90,
-            posterUrl: banner2,
+            posterUrl: film2,
             introduction: "1234353214123132134141"
         },
         {
@@ -31,7 +31,7 @@ const CinemaDetailPage = () => {
             director: "谁",
             leadingActor: "刘青云",
             duration: 90,
-            posterUrl: banner2,
+            posterUrl: film1,
             introduction: "侦探侦探侦探侦探侦探侦探侦探侦探侦探侦探"
         },
         {
@@ -39,7 +39,7 @@ const CinemaDetailPage = () => {
             director: "谁",
             leadingActor: "猪",
             duration: 90,
-            posterUrl: banner2,
+            posterUrl: film2,
             introduction: "猪猪猪猪猪猪猪猪猪猪"
         }
     ])

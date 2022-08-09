@@ -44,7 +44,7 @@ const OrderItem = (props) => {
             <Button
               type="primary"
               shape="round"
-              style={{ position: "absolute", bottom: 120, right: 25 }}
+              style={{ position: "absolute", bottom: 120, right: 25, "display": "none" }}
             >
               查看票据
             </Button>
@@ -56,6 +56,7 @@ const OrderItem = (props) => {
               position: "absolute",
               bottom: 25,
               right: 25,
+              display: "none"
             }}
           />
         </div>

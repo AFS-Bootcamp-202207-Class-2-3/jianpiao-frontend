@@ -38,7 +38,7 @@ const PersonalCenterPage = () => {
           }
           key="1"
         >
-          个人信息
+          暂未录入信息
         </TabPane>
         <TabPane
           tab={
