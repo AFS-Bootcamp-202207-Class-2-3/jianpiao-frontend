@@ -1,11 +1,11 @@
 import axios from "axios";
 
-let baseURL = "http://localhost:8080/"
+let baseURL = "http://localhost:8080/";
 const env = JSON.stringify(process.env);
-if(env.indexOf("jianpiao-frontend-staging")!==-1){
-    baseURL="https://jianpiao-banckend-staging.herokuapp.com/"
-}else if(env.indexOf("jianpiao-frontend-production")!==-1){
-    baseURL="https://jianpiao-banckend-production.herokuapp.com/"
+if (env.indexOf("jianpiao-frontend-staging") !== -1) {
+  baseURL = "https://jianpiao-banckend-staging.herokuapp.com/";
+} else if (env.indexOf("jianpiao-frontend-production") !== -1) {
+  baseURL = "https://jianpiao-banckend-production.herokuapp.com/";
 }
 
 const api = axios.create({
