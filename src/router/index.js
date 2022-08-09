@@ -4,6 +4,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import {JPApi} from "../api/http";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -21,6 +22,10 @@ const routes = [
   getItem(<Link to="/cinemas">影院</Link>, "cinemas", <SettingOutlined />),
 ];
 
+const logout = () =>{
+  JPApi("/user/logout", "post", {})
+}
+
 const userMenu = [
   getItem(
     <Link to="/personal" state={{ activedKey: "1" }}>
@@ -35,6 +40,13 @@ const userMenu = [
     </Link>,
     "myorders",
     <AppstoreOutlined />
+  ),
+  getItem(
+      <span onClick={logout} >
+        退出登录
+      </span>,
+      "logout",
+      <AppstoreOutlined />
   ),
 ];
 
