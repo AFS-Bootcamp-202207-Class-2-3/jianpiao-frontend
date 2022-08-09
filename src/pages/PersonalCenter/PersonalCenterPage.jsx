@@ -1,6 +1,6 @@
 import { ContainerOutlined, UserOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAllOrdersByUserId } from "../../api/order";
 import OrderList from "../../components/order/OrderList";
@@ -10,11 +10,7 @@ const PersonalCenterPage = () => {
   const [orders, setOrders] = useState([]);
   const { state } = useLocation();
 
-  useEffect(() => {
-    (() => {
-      onChange(state.activedKey);
-    })();
-  }, []);
+  let activedKey = state.activedKey;
 
   const getOrderById = (userId) => {
     getAllOrdersByUserId(userId).then((response) => {
@@ -32,7 +28,7 @@ const PersonalCenterPage = () => {
   return (
     <div>
       <span style={{ fontSize: 28 }}>个人中心</span>
-      <Tabs defaultActiveKey={state.activedKey} onChange={onChange}>
+      <Tabs defaultActiveKey={activedKey} onChange={onChange}>
         <TabPane
           tab={
             <span>
