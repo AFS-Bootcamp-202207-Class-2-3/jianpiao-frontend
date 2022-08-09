@@ -3,9 +3,11 @@ import "./Login.css";
 import {Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
-import {loginApi, registerApi} from '../../api/user';
+import {registerApi} from '../../api/user';
 import {updateLoginStatus} from "./UserSlice";
 import {useDispatch} from "react-redux";
+import {JPApi} from "../../api/http";
+
 
 const LoginCard = (prop) => {
 
@@ -38,12 +40,10 @@ const LoginCard = (prop) => {
             password: inputPassword
         };
         if (isLogin) {
-            loginApi(user).then(resp => {
-                if (resp.data.code === 200) {
-                    dispatch(updateLoginStatus(true));
-                    prop.setModal2Visible(false)
-                }
-            });
+            JPApi("/user/login", "post", user, (resp)=>{
+                dispatch(updateLoginStatus(true));
+                prop.setModal2Visible(false)
+            })
         } else {
             if (inputUsername === '' || inputPassword === '' || inputCheckPassword === '') {
                 alert('请输入用户名、密码和确认密码');
