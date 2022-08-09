@@ -14,7 +14,7 @@ const PickSeat = () => {
   const [seatChosen, setSeatChosen] = useState([]);
 
   useEffect(() => {
-    getSeats(1, 1).then((res) => {
+    getSeats(1).then((res) => {
       let temp_seatList = [];
       for (var i = 0; i < m; i++) {
         temp_seatList[i] = [];
