@@ -3,7 +3,6 @@ import "./Login.css";
 import {Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
-import {registerApi} from '../../api/user';
 import {updateLoginStatus} from "./UserSlice";
 import {useDispatch} from "react-redux";
 import {JPApi} from "../../api/http";
@@ -50,12 +49,10 @@ const LoginCard = (prop) => {
             } else if (inputPassword !== inputCheckPassword) {
                 alert('两次密码不一致');
             } else {
-                registerApi(user).then(resp => {
-                    if (resp.data.code === 200) {
-                        dispatch(updateLoginStatus(true));
-                        prop.setModal2Visible(false)
-                    }
-                });
+                JPApi("/user/register", "post", user, (resp)=>{
+                    dispatch(updateLoginStatus(true));
+                    prop.setModal2Visible(false)
+                })
             }
         }
     }

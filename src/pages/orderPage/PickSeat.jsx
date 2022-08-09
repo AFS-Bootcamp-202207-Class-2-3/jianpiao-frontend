@@ -8,7 +8,6 @@ import { useState } from 'react';
 const PickSeat = () => {
 
     const seatList = Array(7).fill(Array(11).fill(1));
-    const [price, setPrice] = useState(0);
     const [seatChosen, setSeatChosen] = useState([]);
 
 
@@ -74,7 +73,7 @@ const PickSeat = () => {
                 </div>
                 <div className='seat_footer'>
                     <div>已选择座位： {seatChosen.map((coordinate, index) => <span>{coordinate.x}排{coordinate.y}座 &nbsp;</span>)}</div>
-                    <div>总价：＄{price}</div>
+                    <div>总价：＄{0}</div>
                 </div>
             </div>
         </div >
