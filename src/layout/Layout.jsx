@@ -8,7 +8,6 @@ const Layout = () => {
     <div className="layout">
       <Header></Header>
       <div className="content">
-        {/* <PickSeat /> */}
         <Outlet />
       </div>
       <Footer></Footer>

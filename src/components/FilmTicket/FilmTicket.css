@@ -7,11 +7,11 @@
   border-width: 1px;
 }
 .item {
-  margin-left: 10px;
+  margin: 5px 0 0 10px;
 }
 .img {
   align-self: flex-end;
-  margin: 20px 20px 0 0;
+  margin: 20px 20px 10px 0;
 }
 .img img {
   width: 55px;
@@ -20,5 +20,5 @@
   font-weight: bold;
 }
 .qrCode {
-  margin: 0 auto;
+  margin: auto;
 }
