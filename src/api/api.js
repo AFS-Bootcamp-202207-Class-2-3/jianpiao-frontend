@@ -10,6 +10,7 @@ if(env.indexOf("jianpiao-frontend-staging")!==-1){
 
 const api = axios.create({
   baseURL: baseURL,
+  withCredentials: true
 });
 
 export default api;
