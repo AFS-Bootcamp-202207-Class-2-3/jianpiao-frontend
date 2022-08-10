@@ -10,7 +10,6 @@ const Cinema = () => {
     const [cinemaList, setCinemaList] = useState([]);
     useEffect(() => {
         const getCinemas = async () => {
-            debugger;
             if (param.filmId === undefined) {
                 getAllCinema().then((response) => {
                     setCinemaList(response.data.data);
