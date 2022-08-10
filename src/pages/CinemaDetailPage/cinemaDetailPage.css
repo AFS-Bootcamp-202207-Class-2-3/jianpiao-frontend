@@ -1,5 +1,6 @@
 .cinema-header {
     background: url("../../assets/background.png") center no-repeat;
+    background-size: 100% 100%;
     height: 300px;
 }
 
@@ -101,4 +102,13 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     word-break: break-all;
+}
+
+.film-sessions {
+    margin-top: 10px;
+}
+
+.film-sessions .no-sessions {
+    color: red;
+    font-size: 20px;
 }

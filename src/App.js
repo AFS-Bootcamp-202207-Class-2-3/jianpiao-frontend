@@ -9,6 +9,7 @@ import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
 import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
 import PickSeat from "./pages/orderPage/PickSeat";
 import Cinema from "./pages/CinemaPage/Cinema";
+import CinemaDetailPage from "./pages/CinemaDetailPage";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/myorders" element={<PersonalCenterPage />} />
           <Route path="/order-finish" element={<OrderFinishPage />} />
           <Route path="/pick-seat" element={<PickSeat />} />
-          <Route path="/cinemas/:filmId" element={<Cinema />} />
+          <Route path="/cinemas/:filmId" element={<CinemaDetailPage />} />
           <Route path="/cinemas" element={<Cinema />} />
         </Route>
       </Routes>

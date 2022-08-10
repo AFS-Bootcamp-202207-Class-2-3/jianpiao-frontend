@@ -3,7 +3,7 @@ import { Col, Row } from 'antd';
 
 const CinemaHeader = (props) => {
 
-    const {cinemaName, address, phone} = props.cinemaInfo;
+    const {cinemaName, address, contactNumber} = props.cinemaInfo;
 
 
     return (
@@ -15,7 +15,7 @@ const CinemaHeader = (props) => {
                 <Col className="info-text" span={14}>
                     <div className='name-text'>{cinemaName}</div>
                     <div className='address-text'>地址：{address}</div>
-                    <div className='phone-text'>电话：{phone}</div>
+                    <div className='phone-text'>电话：{contactNumber}</div>
                 </Col>
             </Row>
         </div>
