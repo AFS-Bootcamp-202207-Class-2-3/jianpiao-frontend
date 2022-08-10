@@ -79,9 +79,12 @@ const PickSeat = () => {
             sessionId: "1",
             seatIndexes: seatIndexes
         }
+        if (seatIndexes.length === 0) {
+            alert("请选择座位");
+            return;
+        };
 
         insertOrder(params).then((res) => {
-            console.log(res.data.data);
             navigate("/order-finish");
         }).catch((err) => {
             console.log(err);
