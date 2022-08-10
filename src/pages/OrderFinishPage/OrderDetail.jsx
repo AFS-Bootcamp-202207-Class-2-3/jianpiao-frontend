@@ -3,8 +3,9 @@ import "./OrderDetail.css";
 import { Table } from "antd";
 const OrderDetail = (props) => {
   const { address, phone } = props.cinemaInfo;
-  const { id, createTime, cinema, state, ticketInfo } = props.orderInfo;
-  const { filmName, hall, seat, date, price } = ticketInfo;
+  const { code, createTime, ticket } = props.orderInfo;
+  const { filmName, hallName, seat, date, totalPrice, cinemaName } =
+    JSON.parse(ticket);
 
   const columns = [
     {
@@ -17,11 +18,11 @@ const OrderDetail = (props) => {
     },
     {
       title: "影院",
-      dataIndex: "cinema",
+      dataIndex: "cinemaName",
     },
     {
       title: "影厅",
-      dataIndex: "hall",
+      dataIndex: "hallName",
     },
     {
       title: "座位",
@@ -38,17 +39,17 @@ const OrderDetail = (props) => {
       key: index,
       filmName: filmName,
       date: date,
-      cinema: cinema,
-      hall: hall,
+      cinemaName: cinemaName,
+      hallName: hallName,
       seat: s,
-      state: state,
+      state: "已完成",
     };
   });
 
   return (
     <div className="OrderDetail">
       <div className="above">
-        <span className="id">订单编号:{id}</span>
+        <span className="id">订单编号:{code}</span>
         <span className="createTime">{createTime ? createTime : ""}</span>
       </div>
       <div className="list">
@@ -59,7 +60,7 @@ const OrderDetail = (props) => {
         ></Table>
       </div>
       <div className="bottom">
-        <div className="price">总价:￥{price}</div>
+        <div className="price">总价:￥{totalPrice}</div>
         <div>
           <div>地址:{address}</div>
           <div>电话:{phone}</div>

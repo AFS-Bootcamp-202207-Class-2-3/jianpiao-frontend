@@ -2,22 +2,14 @@ import React from "react";
 import FilmTicket from "../../components/FilmTicket/FilmTicket";
 import OrderDetail from "./OrderDetail";
 import "./OrderFinishPage.css";
+import { useLocation } from "react-router-dom";
 
 const OrderFinishPage = () => {
-  const ticketInfo = {
-    filmName: "《明日战纪》",
-    hall: "1号放映厅",
-    seat: ["1排1坐", "1排2坐"],
-    date: "2022.08.10",
-    price: 35,
-  };
-  const orderInfo = {
-    id: "1121212121",
-    createTime: "2022.08.07 10:00:00",
-    cinema: "xx影院",
-    state: "完成",
-    ticketInfo: ticketInfo,
-  };
+  const {
+    state: { orderInfo },
+  } = useLocation();
+  const ticketInfo = JSON.parse(orderInfo.ticket);
+
   const cinemaInfo = {
     address: "广东省珠海市香洲区唐家湾镇...",
     phone: "0759-00000000",
