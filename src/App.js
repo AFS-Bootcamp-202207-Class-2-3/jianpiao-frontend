@@ -24,7 +24,7 @@ function App() {
           <Route path="/myorders" element={<PersonalCenterPage />} />
           <Route path="/order-finish" element={<OrderFinishPage />} />
           <Route path="/pick-seat" element={<PickSeat />} />
-          <Route path="/cinemas/:filmId" element={<CinemaDetailPage />} />
+          <Route path="/cinemas/:cinemaId" element={<CinemaDetailPage />} />
           <Route path="/cinemas" element={<Cinema />} />
         </Route>
       </Routes>

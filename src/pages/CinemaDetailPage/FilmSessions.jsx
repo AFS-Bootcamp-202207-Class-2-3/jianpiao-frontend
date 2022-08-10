@@ -11,8 +11,8 @@ const FilmSessions = (props) => {
         setSessionKeys(Object.keys(sessions));
     }, [sessions])
 
-    const clickBuyButton = (id) => {
-        props.clickBuyButton(id)
+    const clickBuyButton = (session) => {
+        props.clickBuyButton(session);
     }
 
     return (

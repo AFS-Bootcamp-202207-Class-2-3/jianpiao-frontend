@@ -3,19 +3,24 @@ import { useState, useEffect } from 'react';
 import CinemaHeader from './CinemaHeader';
 import FilmsList from './FilmsList';
 import FilmSessions from './FilmSessions';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Col, Row } from "antd";
 import "./cinemaDetailPage.css";
 import { getCinemaById, getFilmsByCinemaId } from '../../api/cinemas';
 import { getSessions } from '../../api/sessions';
+import { disassembleString } from '../../utils/utils';
 
 const CinemaDetailPage = () => {
     const params = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
     const [cinemaInfo, setCinemaInfo] = useState({})
     const [currentFilm, setCurrentFilm] = useState({});
     const [films, setFilms] = useState([]);
     const [sessions, setSessions] = useState({});
-    const cinemaId = params.filmId;
+    const [activeIndex, setActiveIndex] = useState(0);
+    const cinemaId = params.cinemaId;
+    const urlParams = disassembleString(location.search);
 
     useEffect(() => {
         (async () => {
@@ -24,15 +29,23 @@ const CinemaDetailPage = () => {
         })();
         (async () => {
             const res = await getFilmsByCinemaId(cinemaId);
-            setFilms(res.data.data);
-            setCurrentFilm(res.data.data[0])
+            const films = res.data.data;
+            setFilms(films);
+            let currentIndex = films.findIndex(item => item.id === urlParams.filmId);
+            if (currentIndex === -1) {
+                setCurrentFilm(res.data.data[0]);
+                setActiveIndex(0);
+            } else {
+                setCurrentFilm(res.data.data[currentIndex]);
+                setActiveIndex(currentIndex);
+            }
         })();
-    }, [cinemaId]);
+    }, [cinemaId, urlParams.filmId]);
 
     useEffect(() => {
         (async () => {
             const res = await getSessions(cinemaId, currentFilm.id);
-            setSessions(res.data.data)
+            setSessions(res.data.data);
         })();
     }, [cinemaId, currentFilm])
 
@@ -40,14 +53,14 @@ const CinemaDetailPage = () => {
         setCurrentFilm(films[index]);
     }
 
-    const buyTicket = (id) => {
-        console.log(id);
+    const buyTicket = (session) => {
+        navigate("/pick-seat", {state: {session, cinemaInfo, filmInfo: currentFilm, }})
     }
 
     return (
         <div>
             <CinemaHeader cinemaInfo={cinemaInfo}></CinemaHeader>
-            <FilmsList films={films} getActiveItemIndex={getActiveItemIndex}></FilmsList>
+            <FilmsList films={films} getActiveItemIndex={getActiveItemIndex} activeIndex={activeIndex}></FilmsList>
             <Row className='film-detail'>
                 <Col span={5} className="film-img">
                     <img src={currentFilm.posterUrl} alt="电影"></img>

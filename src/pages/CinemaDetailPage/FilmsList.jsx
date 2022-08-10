@@ -1,10 +1,14 @@
 import React from 'react';
 import AwesomeSwiper from 'react-awesome-swiper';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const FilmsList = (props) => {
     const [activeSlideIndex, setActiveSlideIndex] = useState(0);
     const films = props.films;
+
+    useEffect(() => {
+        setActiveSlideIndex(props.activeIndex);
+    }, [props.activeIndex]);
 
     const clickFilmItem = (index) => {
         setActiveSlideIndex(index);
@@ -13,14 +17,8 @@ const FilmsList = (props) => {
 
     const config = {
         loop : false,
-        // autoplay: {
-        //   delay: 3000,
-        //   stopOnLastSlide: false,
-        //   disableOnInteraction: true,
-        // },
         spaceBetween: 20,
         width: 160,
-        // slidesPerView: 2,
         slidesPerGroup: 6,
         navigation: {
             nextEl: '.swiper-button-next',

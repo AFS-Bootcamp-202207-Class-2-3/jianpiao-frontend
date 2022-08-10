@@ -5,9 +5,9 @@ import sold from "../../assets/sold.png";
 import seat_checked from "../../assets/seat-checked.png";
 import { useState } from "react";
 import { getSeats } from "../../api/pickSeat";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { insertOrder } from "../../api/order";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const PickSeat = () => {
     let m = 7;
@@ -18,10 +18,12 @@ const PickSeat = () => {
     // eslint-disable-next-line
     const [size, setSize] = useState('large');
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const { filmInfo, session, cinemaInfo } = location.state;
+    console.log({ filmInfo, session, cinemaInfo });
 
     useEffect(() => {
-        getSeats(1).then((res) => {
+        getSeats(session.id).then((res) => {
             let temp_seatList = [];
             for (var i = 0; i < m; i++) {
                 temp_seatList[i] = [];
@@ -45,22 +47,22 @@ const PickSeat = () => {
         let x = e.target.getAttribute("x");
         let y = e.target.getAttribute("y");
         let tempArray = [...seatChosen];
-
+        
         if (imgStatus === 1) {
             e.target.setAttribute("imgstatus", 3);
             e.target.src = seat_checked;
             tempArray.push({ x: x, y: y });
-            setTotalPrice(totalPrice + price);
+            setTotalPrice((price * tempArray.length).toFixed(2));
         } else if (imgStatus === 3) {
             e.target.setAttribute("imgstatus", 1);
             e.target.src = seat;
-            setTotalPrice(totalPrice - price);
             tempArray = tempArray.filter((coordinate, index) => {
                 if (coordinate.x === x && coordinate.y === y) {
                     return null;
                 }
                 return coordinate;
             });
+            setTotalPrice((price * tempArray.length).toFixed(2));
         } else {
             return;
         }
@@ -80,7 +82,7 @@ const PickSeat = () => {
             seatIndexes: seatIndexes
         }
         if (seatIndexes.length === 0) {
-            alert("请选择座位");
+            message.warn("请选择座位");
             return;
         };
 
@@ -94,13 +96,14 @@ const PickSeat = () => {
     return (
         <div className="pickSeat_container">
             <div className="film_message">
-                <img src={require("../../assets/film2.jpg")} alt="我图呢" />
-                <div>《独 行 月 球》</div>
-                <div>时长： 120分钟</div>
-                <div>影院： xx影院</div>
-                <div>影厅： 2号厅</div>
-                <div>放映时间： 17:00 - 19:00</div>
-                <div>单价：＄35</div>
+                <img className="poster-img" src={filmInfo.posterUrl} alt="我图呢" />
+                <div>《{filmInfo.filmName}》</div>
+                <div>时长： {filmInfo.duration}分钟</div>
+                <div>影院： {cinemaInfo.cinemaName}</div>
+                <div>影厅： {session.hallName}</div>
+                <div>放映时间： {session.date}</div>
+                <div>放映时间： {session.startTime} - {session.endTime}</div>
+                <div>单价：￥{price}</div>
             </div>
             <div className="pickSeat_right">
                 <div className="seat">
@@ -165,7 +168,7 @@ const PickSeat = () => {
                                 </span>
                             ))}
                         </div>
-                        <div>总价：＄<span style={{ "fontSize": "20px", "lineHeight": "20px" }}>{totalPrice}</span></div>
+                        <div>总价：￥<span style={{ "fontSize": "20px", "lineHeight": "20px" }}>{totalPrice}</span></div>
                     </div>
                     <div className="book">
                         <Button type="primary" shape="round" size={size} onClick={bookClick}>
