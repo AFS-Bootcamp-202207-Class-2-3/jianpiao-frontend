@@ -3,7 +3,7 @@
     width: 100%;
     min-width: 1200px;
     height: 366px;
-    background: #483c70 url(./image/banner_bg.png) no-repeat 50%;
+    background: #483c70 url(../../assets/banner_bg.png) no-repeat 50%;
 }
 .banner .wrapper {
     width: 100%;

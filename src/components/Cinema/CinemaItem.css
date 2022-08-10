@@ -1,0 +1,15 @@
+.cinemaItem .item {
+  display: flex;
+  width: 1272px;
+  height: 70px;
+}
+.cinemaItem .ant-card-body {
+  padding: 12px 10px;
+}
+.cinemaItem .item .right {
+  align-self: flex-end;
+  margin-left: auto;
+}
+.cinemaItem .item .left .cinemaName {
+  font-size: 130%;
+}

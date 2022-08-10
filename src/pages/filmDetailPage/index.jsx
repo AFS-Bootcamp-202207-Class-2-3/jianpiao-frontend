@@ -1,8 +1,8 @@
 import React from 'react';
-import { Popconfirm, Modal  } from 'antd';
+import { Popconfirm, Modal } from 'antd';
 import './FilmDetailPage.css';
 import { useParams } from "react-router-dom";
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getFilmById } from '../../api/film';
 import moment from 'moment';
 import FilmTicket from '../../components/FilmTicket/FilmTicket';
@@ -14,12 +14,11 @@ export default function FilmDetailPage() {
 
   useEffect(() => {
     const getFilm = async () => {
-        const res = await getFilmById(param.id);
-        console.log(res);
-        setFilm(res.data.film);
+      const res = await getFilmById(param.id);
+      setFilm(res.data.film);
     };
     getFilm();
-}, [param.id]);
+  }, [param.id]);
 
   const ticketInfo = {
     filmName: film.filmName,
@@ -38,7 +37,7 @@ export default function FilmDetailPage() {
         </div>
       ),
 
-      onOk() {},
+      onOk() { },
     });
   };
 
