@@ -10,6 +10,7 @@ import { insertOrder } from "../../api/order";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const PickSeat = () => {
+
   let m = 7;
   const [price, setPrice] = useState(0);
   const [seatList, setSeatList] = useState([]);
@@ -41,48 +42,48 @@ const PickSeat = () => {
     // eslint-disable-next-line
   }, []);
 
-  const clickSeat = (e) => {
-    let imgStatus = parseInt(e.target.getAttribute("imgstatus"));
-    let x = e.target.getAttribute("x");
-    let y = e.target.getAttribute("y");
-    let tempArray = [...seatChosen];
-
-    if (imgStatus === 1) {
-      e.target.setAttribute("imgstatus", 3);
-      e.target.src = seat_checked;
-      tempArray.push({ x: x, y: y });
-      setTotalPrice((price * tempArray.length).toFixed(2));
-    } else if (imgStatus === 3) {
-      e.target.setAttribute("imgstatus", 1);
-      e.target.src = seat;
-      tempArray = tempArray.filter((coordinate, index) => {
-        if (coordinate.x === x && coordinate.y === y) {
-          return null;
+    const clickSeat = (e) => {
+        let imgStatus = parseInt(e.target.getAttribute("imgstatus"));
+        let x = e.target.getAttribute("x");
+        let y = e.target.getAttribute("y");
+        let tempArray = [...seatChosen];
+        
+        if (imgStatus === 1) {
+            e.target.setAttribute("imgstatus", 3);
+            e.target.src = seat_checked;
+            tempArray.push({ x: x, y: y });
+            setTotalPrice((price * tempArray.length).toFixed(2));
+        } else if (imgStatus === 3) {
+            e.target.setAttribute("imgstatus", 1);
+            e.target.src = seat;
+            tempArray = tempArray.filter((coordinate, index) => {
+                if (coordinate.x === x && coordinate.y === y) {
+                    return null;
+                }
+                return coordinate;
+            });
+            setTotalPrice((price * tempArray.length).toFixed(2));
+        } else {
+            return;
         }
-        return coordinate;
-      });
-      setTotalPrice((price * tempArray.length).toFixed(2));
-    } else {
-      return;
-    }
-    setSeatChosen(tempArray);
-  };
-
-  const bookClick = (e) => {
-    let seatIndexes = [];
-    seatChosen.map((coordinate, index) => {
-      let x = parseInt(coordinate.x);
-      let y = parseInt(coordinate.y);
-      seatIndexes.push((x - 1) * 11 + (y - 1));
-      return null;
-    });
-    const params = {
-      sessionId: "1",
-      seatIndexes: seatIndexes,
+        setSeatChosen(tempArray);
     };
-    if (seatIndexes.length === 0) {
-      message.warn("请选择座位");
-      return;
+
+    const bookClick = (e) => {
+        let seatIndexes = [];
+        seatChosen.map((coordinate, index) => {
+            let x = parseInt(coordinate.x);
+            let y = parseInt(coordinate.y);
+            seatIndexes.push((x - 1) * 11 + (y - 1));
+            return null;
+        })
+        const params = {
+            sessionId: session.id,
+            seatIndexes: seatIndexes
+        }
+        if (seatIndexes.length === 0) {
+            message.warn("请选择座位");
+            return;
     }
 
     insertOrder(params)
@@ -93,101 +94,101 @@ const PickSeat = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
+            console.log(err);
       });
   };
 
-  return (
-    <div className="pickSeat_container">
-      <div className="film_message">
-        <img className="poster-img" src={filmInfo.posterUrl} alt="我图呢" />
-        <div>《{filmInfo.filmName}》</div>
-        <div>时长： {filmInfo.duration}分钟</div>
-        <div>影院： {cinemaInfo.cinemaName}</div>
-        <div>影厅： {session.hallName}</div>
-        <div>放映时间： {session.date}</div>
+    return (
+        <div className="pickSeat_container">
+            <div className="film_message">
+                <img className="poster-img" src={filmInfo.posterUrl} alt="我图呢" />
+                <div>《{filmInfo.filmName}》</div>
+                <div>时长： {filmInfo.duration}分钟</div>
+                <div>影院： {cinemaInfo.cinemaName}</div>
+                <div>影厅： {session.hallName}</div>
+                <div>放映时间： {session.date}</div>
         <div>
           放映时间： {session.startTime} - {session.endTime}
         </div>
-        <div>单价：￥{price}</div>
-      </div>
-      <div className="pickSeat_right">
-        <div className="seat">
-          <div className="seat_head">
-            <div>
-              <img src={require("../../assets/seat.png")} alt="我图呢" />{" "}
-              可选座位
+                <div>单价：￥{price}</div>
             </div>
-            <div>
-              <img src={require("../../assets/sold.png")} alt="我图呢" />{" "}
-              已售座位
-            </div>
-            <div>
-              <img
-                src={require("../../assets/seat-checked.png")}
-                alt="我图呢"
-              />{" "}
-              已选座位
-            </div>
-          </div>
-          <div className="screen">
-            <div>
-              <img src={require("../../assets/screen.png")} alt="我图呢" />
-              <div>银幕中央</div>
-            </div>
-          </div>
-          <div className="seat_list">
-            {seatList.map((oneLine, index1) => (
-              <div className="seat_line" key={index1}>
-                <div>
-                  <span>{index1 + 1}</span>
+            <div className="pickSeat_right">
+                <div className="seat">
+                    <div className="seat_head">
+                        <div>
+                            <img src={require("../../assets/seat.png")} alt="我图呢" />{" "}
+                            可选座位
+                        </div>
+                        <div>
+                            <img src={require("../../assets/sold.png")} alt="我图呢" />{" "}
+                            已售座位
+                        </div>
+                        <div>
+                            <img
+                                src={require("../../assets/seat-checked.png")}
+                                alt="我图呢"
+                            />{" "}
+                            已选座位
+                        </div>
+                    </div>
+                    <div className="screen">
+                        <div>
+                            <img src={require("../../assets/screen.png")} alt="我图呢" />
+                            <div>银幕中央</div>
+                        </div>
+                    </div>
+                    <div className="seat_list">
+                        {seatList.map((oneLine, index1) => (
+                            <div className="seat_line" key={index1}>
+                                <div>
+                                    <span>{index1 + 1}</span>
                   {oneLine.map((s, index2) => (
-                    <img
-                      key={index2}
+                                                <img
+                                                    key={index2}
                       src={s === "1" ? seat : s === "2" ? sold : seat_checked}
-                      imgstatus={s}
-                      x={index1 + 1}
-                      y={index2 + 1}
-                      onClick={clickSeat}
-                      alt="我图呢"
-                    />
+                                                    imgstatus={s}
+                                                    x={index1 + 1}
+                                                    y={index2 + 1}
+                                                    onClick={clickSeat}
+                                                    alt="我图呢"
+                                                />
                   ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="seat_footer">
-          <div className="seat_footer_msg">
-            <div>
-              已选择座位：{" "}
-              {seatChosen.map((coordinate, index) => (
-                <span key={index}>
-                  {coordinate.x}排{coordinate.y}座 &nbsp;
-                </span>
-              ))}
-            </div>
+                <div className="seat_footer">
+                    <div className="seat_footer_msg">
+                        <div>
+                            已选择座位：{" "}
+                            {seatChosen.map((coordinate, index) => (
+                                <span key={index}>
+                                    {coordinate.x}排{coordinate.y}座 &nbsp;
+                                </span>
+                            ))}
+                        </div>
             <div>
               总价：￥
               <span style={{ fontSize: "20px", lineHeight: "20px" }}>
                 {totalPrice}
               </span>
             </div>
-          </div>
-          <div className="book">
+                    </div>
+                    <div className="book">
             <Button
               type="primary"
               shape="round"
               size={size}
               onClick={bookClick}
             >
-              确认选座
-            </Button>
-          </div>
-        </div>
-      </div>
+                            确认选座
+                        </Button>
+                    </div>
+                </div>
+            </div>
     </div>
-  );
+    );
 };
 
 export default PickSeat;
