@@ -1,13 +1,12 @@
 import React from 'react';
-import { Popconfirm, Modal } from 'antd';
 import './FilmDetailPage.css';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { getFilmById } from '../../api/film';
 import moment from 'moment';
-import FilmTicket from '../../components/FilmTicket/FilmTicket';
 
 export default function FilmDetailPage() {
+  const navigate = useNavigate();
   let param = useParams();
 
   const [film, setFilm] = useState({});
@@ -20,25 +19,8 @@ export default function FilmDetailPage() {
     getFilm();
   }, [param.id]);
 
-  const ticketInfo = {
-    filmName: film.filmName,
-    hall: "1号放映厅",
-    seat: "1排1坐",
-    date: "2022.08.10",
-    price: 35
-  }
-
-  const tickInfo = () => {
-    Modal.info({
-      title: '票据信息',
-      content: (
-        <div>
-          <FilmTicket ticketInfo={ticketInfo}></FilmTicket>
-        </div>
-      ),
-
-      onOk() { },
-    });
+  const toCinemaPage = () => {
+    navigate("/cinemas/" + film.id);
   };
 
   return (
@@ -63,15 +45,7 @@ export default function FilmDetailPage() {
             </div>
             <div className='action-buyBtn'>
               {/* <button>想看</button> */}
-              <Popconfirm
-                title="确定购票吗?"
-                onConfirm={tickInfo}
-                placement="right"
-                okText="确定"
-                cancelText="取消"
-              >
-                <button>购票</button>
-              </Popconfirm>
+              <button onClick={toCinemaPage}>购票</button>
             </div>
             <div className='movie-stats-container'>
               <div className='movie-index'>
