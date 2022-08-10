@@ -19,7 +19,7 @@ export const JPApi = (path, method, data, fun) => {
             if (fun) fun(resp)
         }
     }).catch(e => {
-        if (e.response.data.msg !== undefined) {
+        if(e.response && e.response.data && e.response.data.msg) {
             message.error(e.response.data.msg)
         } else {
             message.error(e.message)

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "./Login.css";
-import {Modal} from 'antd';
+import {message, Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
 import {updateLoginStatus, updateUserInfo} from "./UserSlice";
@@ -48,17 +48,18 @@ const LoginCard = (prop) => {
                 });
             }
             // 写入sessionStorage
-            sessionStorage.setItem("userInfo", JSON.stringify(resp.data.data.userInfo));
+            if(resp.data.data.userInfo){
+                sessionStorage.setItem("userInfo", JSON.stringify(resp.data.data.userInfo));
 
-            // 写入redux
-            dispatch(updateUserInfo(resp.data.data.userInfo));
+                // 写入redux
+                dispatch(updateUserInfo(resp.data.data.userInfo));
 
-            dispatch(updateLoginStatus(true));
-
-
-            // 关闭登录窗
-            prop.setModal2Visible(false)
-
+                dispatch(updateLoginStatus(true));
+                // 关闭登录窗
+                prop.setModal2Visible(false)
+            }else{
+                message.error("未能得到用户信息");
+            }
         }
         if (isLogin) {
             JPApi("/user/login", "post", user, loginOrRegisterSuccess);

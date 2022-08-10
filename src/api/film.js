@@ -9,3 +9,7 @@ export const getAllFilms = () => {
 export const getFilmById = (id) => {
   return api.get(`films/${id}`);
 }
+
+export const addFilm = (film) => {
+  return api.post(filmUrl, film);
+}
