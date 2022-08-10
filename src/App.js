@@ -6,7 +6,6 @@ import Films from "./pages/Films";
 import FilmDetailPage from "./pages/filmDetailPage";
 import HomePage from "./pages/HomePage";
 import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
-import CinemaDetailPage from "./pages/CinemaDetailPage";
 import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
 import PickSeat from "./pages/orderPage/PickSeat";
 import Cinema from "./pages/CinemaPage/Cinema";
