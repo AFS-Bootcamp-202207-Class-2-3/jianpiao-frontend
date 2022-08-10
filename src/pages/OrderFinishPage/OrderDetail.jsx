@@ -2,7 +2,7 @@ import React from "react";
 import "./OrderDetail.css";
 import { Table } from "antd";
 const OrderDetail = (props) => {
-  const { address, phone } = props.cinemaInfo;
+  const { address, contactNumber } = props.cinemaInfo;
   const { code, createTime, ticket } = props.orderInfo;
   const { filmName, hallName, seat, date, totalPrice, cinemaName } =
     JSON.parse(ticket);
@@ -63,7 +63,7 @@ const OrderDetail = (props) => {
         <div className="price">总价:￥{totalPrice}</div>
         <div>
           <div>地址:{address}</div>
-          <div>电话:{phone}</div>
+          <div>电话:{contactNumber}</div>
         </div>
       </div>
     </div>

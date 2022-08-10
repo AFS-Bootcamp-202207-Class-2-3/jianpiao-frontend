@@ -20,7 +20,6 @@ const PickSeat = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { filmInfo, session, cinemaInfo } = location.state;
-  console.log({ filmInfo, session, cinemaInfo });
 
   useEffect(() => {
     getSeats(session.id).then((res) => {
@@ -88,7 +87,11 @@ const PickSeat = () => {
 
     insertOrder(params)
       .then((res) => {
-        navigate("/order-finish");
+        console.log(cinemaInfo);
+        navigate("/order-finish", {
+          replace: false,
+          state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
+        });
       })
       .catch((err) => {
         console.log(err);

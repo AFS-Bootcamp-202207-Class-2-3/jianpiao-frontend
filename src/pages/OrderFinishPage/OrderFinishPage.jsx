@@ -6,14 +6,12 @@ import { useLocation } from "react-router-dom";
 
 const OrderFinishPage = () => {
   const {
-    state: { orderInfo },
+    state: { orderInfo, cinemaInfo },
   } = useLocation();
+  console.log(orderInfo);
+  console.log(cinemaInfo);
   const ticketInfo = JSON.parse(orderInfo.ticket);
 
-  const cinemaInfo = {
-    address: "广东省珠海市香洲区唐家湾镇...",
-    phone: "0759-00000000",
-  };
   return (
     <div className="OrderFinishPage">
       <FilmTicket ticketInfo={ticketInfo} />

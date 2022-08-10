@@ -1,5 +1,5 @@
 .OrderDetail {
-  height: 425px;
+  min-height: 425px;
   width: 1050px;
   border-style: solid;
   border-width: 1px;
