@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getAllOrdersByUserId } from "../../api/order";
 import OrderList from "../../components/order/OrderList";
+import PersonalInfo from "../PersonalInfo/PersonalInfo";
 
 const PersonalCenterPage = () => {
   const { TabPane } = Tabs;
@@ -48,7 +49,7 @@ const PersonalCenterPage = () => {
           }
           key="1"
         >
-          暂未录入信息
+          <PersonalInfo userInfo={userInfo}/>
         </TabPane>
         <TabPane
           tab={
