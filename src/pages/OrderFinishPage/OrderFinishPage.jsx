@@ -8,8 +8,6 @@ const OrderFinishPage = () => {
   const {
     state: { orderInfo, cinemaInfo },
   } = useLocation();
-  console.log(orderInfo);
-  console.log(cinemaInfo);
   const ticketInfo = JSON.parse(orderInfo.ticket);
 
   return (

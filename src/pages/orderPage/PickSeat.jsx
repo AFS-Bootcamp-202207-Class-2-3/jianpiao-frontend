@@ -87,7 +87,6 @@ const PickSeat = () => {
 
     insertOrder(params)
       .then((res) => {
-        console.log(cinemaInfo);
         navigate("/order-finish", {
           replace: false,
           state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
