@@ -9,6 +9,7 @@ import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
 import CinemaDetailPage from "./pages/CinemaDetailPage";
 import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
 import PickSeat from "./pages/orderPage/PickSeat";
+import Cinema from "./pages/CinemaPage/Cinema";
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
           <Route path="/personal" element={<PersonalCenterPage />} />
           <Route path="/films/:id" element={<FilmDetailPage />} />
           <Route path="/myorders" element={<PersonalCenterPage />} />
-          <Route path="/cinemas" element={<CinemaDetailPage />} />
           <Route path="/order-finish" element={<OrderFinishPage />} />
           <Route path="/pick-seat" element={<PickSeat />} />
+          <Route path="/cinemas/:filmId" element={<Cinema />} />
+          <Route path="/cinemas" element={<Cinema />} />
         </Route>
       </Routes>
     </BrowserRouter>

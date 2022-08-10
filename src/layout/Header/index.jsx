@@ -1,17 +1,67 @@
-import { DownOutlined } from "@ant-design/icons";
+import {DownOutlined, HomeOutlined} from "@ant-design/icons";
 import { Col, Dropdown, Menu, Row, Space } from "antd";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
 import LoginCard from "../../pages/user/LoginCard";
-import { routes, userMenu } from "../../router";
+import { routes, getItem } from "../../router";
 import "./header.css";
+import {updateLoginStatus, updateUserInfo, logout} from "../../pages/user/UserSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    AppstoreOutlined
+} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
 const Header = () => {
+
+    const dispatchLogout = () => {
+        dispatch(logout());
+        // dispatch(updateLoginStatus(false));
+    }
+
+    const userMenu = [
+        getItem(
+            <Link to="/personal" state={{ activedKey: "1" }}>
+                个人信息
+            </Link>,
+            "userinfo",
+            <HomeOutlined />
+        ),
+        getItem(
+            <Link to="/personal" state={{ activedKey: "2" }}>
+                我的订单
+            </Link>,
+            "myorders",
+            <AppstoreOutlined />
+        ),
+        getItem(
+            <span onClick={dispatchLogout} >退出登录</span>,
+            "logout",
+            <AppstoreOutlined />
+        ),
+    ];
+
+    const dispatch = useDispatch();
+
   const [current, setCurrent] = useState("mail");
 
-  const loginStatus = useSelector((state) => {
-    return state.user.isLoginGlobal;
-  });
+    const loginStatus = useSelector((state) => {
+        return state.user.isLoginGlobal;
+    });
+
+
+
+
+
+  // 获取sessionStorage userInfo
+    useEffect(()=>{
+        let sessionStorageUserInfo = sessionStorage.getItem("userInfo");
+        if(sessionStorageUserInfo){ // 已经登录
+            // 保存userInfo到redux
+            dispatch(updateUserInfo(JSON.parse(sessionStorageUserInfo)));
+            // 保存登录状态
+            dispatch(updateLoginStatus(true));
+        }
+    }, [dispatch]);
 
   const [modal2Visible, setModal2Visible] = useState(false);
 
