@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAllCinema, getCinemaByFilmId } from "../../api/cinema";
-import "./cinema.css";
+import "./Cinema.css";
 import CinemaList from "../../components/Cinema/CinemaList";
 import FilmIntroduction from "./FilmIntroduction";
 import { disassembleString } from "../../utils/utils";
