@@ -13,4 +13,3 @@ export const insertOrder = (order) => {
 export const getOrderById = (id) => {
   return api.get(`${moduleURL}/${id}`);
 };
-

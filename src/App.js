@@ -7,6 +7,8 @@ import FilmDetailPage from "./pages/filmDetailPage";
 import HomePage from "./pages/HomePage";
 import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
 import CinemaDetailPage from "./pages/CinemaDetailPage";
+import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
+import PickSeat from "./pages/orderPage/PickSeat";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/films/:id" element={<FilmDetailPage />} />
           <Route path="/myorders" element={<PersonalCenterPage />} />
           <Route path="/cinemas" element={<CinemaDetailPage />} />
+          <Route path="/order-finish" element={<OrderFinishPage />} />
+          <Route path="/pick-seat" element={<PickSeat />} />
         </Route>
       </Routes>
     </BrowserRouter>

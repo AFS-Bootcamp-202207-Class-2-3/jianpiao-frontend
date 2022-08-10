@@ -106,12 +106,38 @@
   width: 100%;
   height: 90px;
   border: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
 }
 .seat_footer > div {
   margin: 10px 0;
   margin-left: 10px;
   font-weight: 700;
 }
-.seat_footer span {
+.seat_footer div > span {
   color: red;
+}
+.seat_footer_msg {
+  position: relative;
+  /* border: 1px solid red; */
+}
+.seat_footer_msg > div {
+  height: 35px;
+  font-size: 15px;
+  line-height: 30px;
+  /* border: 1px solid red; */
+}
+.book {
+  /* border: 1px solid red; */
+  position: relative;
+  right: 3%;
+}
+.book .ant-btn-round.ant-btn-lg {
+  height: 50px;
+  padding: 6.4px 20px;
+  font-size: 15px;
+  width: 150px;
+  border-radius: 40px;
 }
