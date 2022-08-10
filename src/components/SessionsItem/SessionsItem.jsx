@@ -32,14 +32,14 @@ const SessionsItem = (props) => {
           key: 'action',
           render: (record) => (
             <Space size="middle">
-                <Button type="primary" onClick={() => toBuyTicket(record.id)}>点击购票</Button>
+                <Button type="primary" onClick={() => toBuyTicket(record)}>点击购票</Button>
             </Space>
           )
         },
       ];
 
-      const toBuyTicket = (id) => {
-        props.clickBuyButton(id);
+      const toBuyTicket = (session) => {
+        props.clickBuyButton(session);
       }
 
     return (

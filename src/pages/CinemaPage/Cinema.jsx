@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAllCinema, getCinemaByFilmId } from '../../api/cinema';
-import './Cinema.css'
+import './cinema.css'
 import CinemaList from '../../components/Cinema/CinemaList';
-import FilmIntroduction from './FilmIntroduction'
+import FilmIntroduction from './FilmIntroduction';
+import { disassembleString } from '../../utils/utils';
 
 const Cinema = () => {
-    const param = useParams();
+
+    const location = useLocation();
+    const navigate = useNavigate();
     const [cinemaList, setCinemaList] = useState([]);
+
+    const params = disassembleString(location.search);
+    const filmId = params.filmId;
+
     useEffect(() => {
+
         const getCinemas = async () => {
-            if (param.filmId === undefined) {
+            if (filmId === undefined) {
                 getAllCinema().then((response) => {
                     setCinemaList(response.data.data);
                 });
             } else {
-                getCinemaByFilmId(param.filmId).then((response) => {
+                getCinemaByFilmId(filmId).then((response) => {
                     setCinemaList(response.data.data);
                 });
             }
         };
         getCinemas();
-    }, [param.filmId]);
+    }, [filmId]);
+
+    const toBuyTicket = (cinemaId) => {
+        if (filmId === undefined) {
+            navigate("/cinemas/"+cinemaId);
+        } else {
+            navigate("/cinemas/"+cinemaId+"?filmId="+filmId);
+        }
+        
+    }
 
     return (<div className='Cinema'>
-        {param.filmId ? <FilmIntroduction filmId={param.filmId} /> : ""}
-        <CinemaList cinemaList={cinemaList} />
+        {filmId ? <FilmIntroduction filmId={filmId} /> : ""}
+        <CinemaList cinemaList={cinemaList} className="cinema-list" toBuyTicket={toBuyTicket} />
     </div>);
 }
 

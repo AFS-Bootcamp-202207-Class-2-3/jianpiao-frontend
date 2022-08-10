@@ -1,5 +1,6 @@
 import React from 'react';
 import './FilmDetailPage.css';
+import { Button } from 'antd';
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { getFilmById } from '../../api/film';
@@ -20,7 +21,7 @@ export default function FilmDetailPage() {
   }, [param.id]);
 
   const toCinemaPage = () => {
-    navigate("/cinemas/" + film.id);
+    navigate("/cinemas?filmId=" + film.id);
   };
 
   return (
@@ -45,7 +46,7 @@ export default function FilmDetailPage() {
             </div>
             <div className='action-buyBtn'>
               {/* <button>想看</button> */}
-              <button onClick={toCinemaPage}>购票</button>
+              <Button type='primary' onClick={toCinemaPage}>购票</Button>
             </div>
             <div className='movie-stats-container'>
               <div className='movie-index'>
