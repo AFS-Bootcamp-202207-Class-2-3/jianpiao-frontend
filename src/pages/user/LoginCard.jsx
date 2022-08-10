@@ -3,7 +3,7 @@ import "./Login.css";
 import {Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
-import {updateLoginStatus, updateRoles, updatePermissions, updateUserInfo} from "./UserSlice";
+import {updateLoginStatus, updateUserInfo} from "./UserSlice";
 import {useDispatch} from "react-redux";
 import {JPApi} from "../../api/http";
 
@@ -39,29 +39,36 @@ const LoginCard = (prop) => {
             username: inputUsername,
             password: inputPassword
         };
+        const loginOrRegisterSuccess = (resp) =>{
+            // 把response的cookie信息放到浏览器的cookie中
+            const cookies = resp.headers["set-cookie"];
+            if (resp.headers["set-cookie"]) {
+                cookies.forEach(cookie => {
+                    document.cookie = cookie;
+                });
+            }
+            // 写入sessionStorage
+            sessionStorage.setItem("userInfo", JSON.stringify(resp.data.data.userInfo));
+
+            // 写入redux
+            dispatch(updateUserInfo(resp.data.data.userInfo));
+
+            dispatch(updateLoginStatus(true));
+
+
+            // 关闭登录窗
+            prop.setModal2Visible(false)
+
+        }
         if (isLogin) {
-            JPApi("/user/login", "post", user, (resp)=>{
-                // console.log(resp)
-                dispatch(updateLoginStatus(true));
-                dispatch(updateUserInfo(resp.data.data.user));
-                dispatch(updateRoles(resp.data.data.roles));
-                dispatch(updatePermissions(resp.data.data.permissions));
-                prop.setModal2Visible(false)
-            })
+            JPApi("/user/login", "post", user, loginOrRegisterSuccess);
         } else {
             if (inputUsername === '' || inputPassword === '' || inputCheckPassword === '') {
                 alert('请输入用户名、密码和确认密码');
             } else if (inputPassword !== inputCheckPassword) {
                 alert('两次密码不一致');
             } else {
-                JPApi("/user/register", "post", user, (resp)=>{
-                    // console.log(resp)
-                    dispatch(updateLoginStatus(true));
-                    dispatch(updateUserInfo(resp.data.data.user));
-                    dispatch(updateRoles(resp.data.data.roles));
-                    dispatch(updatePermissions(resp.data.data.permissions));
-                    prop.setModal2Visible(false);
-                })
+                JPApi("/user/register", "post", user, loginOrRegisterSuccess);
             }
         }
     }

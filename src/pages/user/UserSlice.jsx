@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {JPApi} from "../../api/http";
 
 const userSlice = createSlice({
     name: "User",
@@ -20,9 +21,15 @@ const userSlice = createSlice({
         },
         updateUserInfo: (state, action) => {
             state.userInfo = action.payload;
+        },
+        logout: (state, action) => {
+            JPApi("/user/logout", "post", {}, ()=>{
+                sessionStorage.removeItem("userInfo");
+            });
+            return {...state, isLoginGlobal: false, userInfo: {}}
         }
     }
 });
 
-export const {updateLoginStatus, updatePermissions, updateRoles, updateUserInfo} = userSlice.actions;
+export const {updateLoginStatus, updatePermissions, updateRoles, updateUserInfo, logout} = userSlice.actions;
 export default userSlice.reducer;
