@@ -3,13 +3,14 @@ import "./Login.css";
 import {Modal} from 'antd';
 import LoginCardHeader from './LoginCardHeader';
 import {Switch, Input} from 'antd';
-import {updateLoginStatus} from "./UserSlice";
+import {updateLoginStatus, updateRoles, updatePermissions, updateUserInfo} from "./UserSlice";
 import {useDispatch} from "react-redux";
 import {JPApi} from "../../api/http";
 
 
 const LoginCard = (prop) => {
 
+    // 登录注册转换
     const [isLogin, setIsLogin] = useState(true);
 
     const switchOnChange = (e) => {
@@ -40,7 +41,11 @@ const LoginCard = (prop) => {
         };
         if (isLogin) {
             JPApi("/user/login", "post", user, (resp)=>{
+                // console.log(resp)
                 dispatch(updateLoginStatus(true));
+                dispatch(updateUserInfo(resp.data.data.user));
+                dispatch(updateRoles(resp.data.data.roles));
+                dispatch(updatePermissions(resp.data.data.permissions));
                 prop.setModal2Visible(false)
             })
         } else {
@@ -50,8 +55,12 @@ const LoginCard = (prop) => {
                 alert('两次密码不一致');
             } else {
                 JPApi("/user/register", "post", user, (resp)=>{
+                    // console.log(resp)
                     dispatch(updateLoginStatus(true));
-                    prop.setModal2Visible(false)
+                    dispatch(updateUserInfo(resp.data.data.user));
+                    dispatch(updateRoles(resp.data.data.roles));
+                    dispatch(updatePermissions(resp.data.data.permissions));
+                    prop.setModal2Visible(false);
                 })
             }
         }
