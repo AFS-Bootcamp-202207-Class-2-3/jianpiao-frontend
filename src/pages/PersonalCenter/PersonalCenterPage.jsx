@@ -1,6 +1,7 @@
 import { ContainerOutlined, UserOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getAllOrdersByUserId } from "../../api/order";
 import OrderList from "../../components/order/OrderList";
@@ -10,8 +11,12 @@ const PersonalCenterPage = () => {
   const [orders, setOrders] = useState([]);
   const { state } = useLocation();
 
+  const userInfo = useSelector((state) => {
+    return state.user.userInfo;
+  });
+
   let activedKey = state.activedKey;
-  
+
   useEffect(() => {
     onChange(state.activedKey);
     // eslint-disable-next-line
@@ -24,7 +29,7 @@ const PersonalCenterPage = () => {
   };
 
   const onChange = (key) => {
-    const userId = "1";
+    const userId = userInfo.id;
     if (key === "2") {
       getOrderById(userId);
     }
