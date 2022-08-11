@@ -74,6 +74,9 @@ export default function FilmManagementPage(props) {
                 if (res.data.code === 200) {
                     message.success('添加电影成功', 5)
                     setIsModalVisible(false);
+                    const film = res.data.data;
+                    film.status = "showing";
+                    setfilms([film, ...films]);
                     formRef.current.resetFields();
                 }
             })
@@ -82,6 +85,7 @@ export default function FilmManagementPage(props) {
                 if (res.data.code === 200) {
                     message.success('修改电影成功', 5)
                     setIsModalVisible(false);
+                    setfilms(films);
                 }
             })
         }
@@ -113,7 +117,7 @@ export default function FilmManagementPage(props) {
             })
         }
    
-        window.location.reload();
+        // window.location.reload();
     }
 
 
@@ -207,7 +211,6 @@ export default function FilmManagementPage(props) {
             </Modal>
 
             <Table dataSource={films} rowKey={record => record.film_cinema_id + record.id}>
-                <Column title="影院号" dataIndex="cinemaId" key="cinemaId" />
                 <Column title="电影名称" dataIndex="filmName" key="filmName" />
                 <Column title="上映日期" dataIndex="releasedTime" key="releasedTime" />
                 <Column title="时长" dataIndex="duration" key="duration" />
@@ -215,7 +218,7 @@ export default function FilmManagementPage(props) {
                 <Column title="演员" dataIndex="leadingActor" key="leadingActor" />
                 <Column title="电影简介" dataIndex="introduction" key="introduction" />
                 {/* <Column title="电影海报" dataIndex="posterUrl" key="posterUrl" /> */}
-                <Column title="状态" dataIndex="status" key="status" render={(text) => { return text === "showing" ? <span>上映中</span> : <span>已下架</span> }} />
+                {/* <Column title="状态" dataIndex="status" key="status" render={(text) => { return text === "showing" ? <span>上映中</span> : <span>已下架</span> }} /> */}
 
                 <Column
                     title="操作"
