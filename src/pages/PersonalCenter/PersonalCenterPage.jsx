@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getAllOrdersByUserId } from "../../api/order";
 import OrderList from "../../components/order/OrderList";
-import PersonalInfo from "../PersonalInfo/PersonalInfo";
+import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";
 
 const PersonalCenterPage = () => {
   const { TabPane } = Tabs;
@@ -49,7 +49,7 @@ const PersonalCenterPage = () => {
           }
           key="1"
         >
-          <PersonalInfo userInfo={userInfo}/>
+          <PersonalInfo userInfo={userInfo} />
         </TabPane>
         <TabPane
           tab={
