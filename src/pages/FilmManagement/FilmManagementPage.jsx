@@ -91,17 +91,6 @@ export default function FilmManagementPage(props) {
         console.log('Failed:', errorInfo);
     };
 
-    function copy(obj) {
-        var newobj = obj.constructor === Array ? [] : {};
-        if (typeof obj !== 'object') {
-            return;
-        }
-        for (var i in obj) {
-            newobj[i] = typeof obj[i] === 'object' ? copy(obj[i]) : obj[i];
-        }
-        return newobj
-    }
-
     const onChange = (checked, record) => {
         console.log(record.film_cinema_id)
         if (checked) {
