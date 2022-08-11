@@ -4,8 +4,8 @@ import { Table } from "antd";
 const OrderDetail = (props) => {
   const { address, contactNumber } = props.cinemaInfo;
   const { code, createTime, ticket } = props.orderInfo;
-  const { filmName, hallName, seat, date, price, cinemaName } = JSON.parse(ticket);
-  
+  const { filmName, hallName, seat, date, totalPrice, cinemaName } = JSON.parse(ticket);
+
   const columns = [
     {
       title: "影片",
@@ -59,7 +59,7 @@ const OrderDetail = (props) => {
         ></Table>
       </div>
       <div className="bottom">
-        <div className="price">总价:<span className="price-text">￥{price}</span></div>
+        <div className="price">总价:<span className="price-text">￥{totalPrice}</span></div>
         <div>
           <div>地址：{address}</div>
           <div>电话：{contactNumber}</div>
