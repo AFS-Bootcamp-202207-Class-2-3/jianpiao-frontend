@@ -7,40 +7,41 @@ import { useState } from "react";
 import { getSeats } from "../../api/pickSeat";
 import { Button, message } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-import {JPApi} from "../../api/http";
+import { JPApi } from "../../api/http";
 
 const PickSeat = () => {
 
-  let m = 7;
-  const [price, setPrice] = useState(0);
-  const [seatList, setSeatList] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [seatChosen, setSeatChosen] = useState([]);
-  // eslint-disable-next-line
-  const [size, setSize] = useState("large");
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { filmInfo, session, cinemaInfo } = location.state;
-
-  useEffect(() => {
-    getSeats(session.id).then((res) => {
-      let temp_seatList = [];
-      for (var i = 0; i < m; i++) {
-        temp_seatList[i] = [];
-      }
-      let site = res.data.data.site;
-      let index = 0;
-      for (let idx = 0; idx < site.length; ++idx) {
-        if (idx > 0 && idx % 11 === 0) {
-          index++;
-        }
-        temp_seatList[index].push(site[idx]);
-      }
-      setPrice(res.data.data.price);
-      setSeatList(temp_seatList);
-    });
+    let m = 7;
+    const [price, setPrice] = useState(0);
+    const [seatList, setSeatList] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [seatChosen, setSeatChosen] = useState([]);
     // eslint-disable-next-line
-  }, []);
+    const [size, setSize] = useState("large");
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { filmInfo, session, cinemaInfo } = location.state;
+
+    useEffect(() => {
+        getSeats(session.id).then((res) => {
+            let temp_seatList = [];
+            for (var i = 0; i < m; i++) {
+                temp_seatList[i] = [];
+            }
+            let site = res.data.data.site;
+            let index = 0;
+            for (let idx = 0; idx < site.length; ++idx) {
+                if (idx > 0 && idx % 11 === 0) {
+                    index++;
+                }
+
+                temp_seatList[index].push(site[idx]);
+            }
+            setPrice(res.data.data.price);
+            setSeatList(temp_seatList);
+        });
+        // eslint-disable-next-line
+    }, []);
 
     const clickSeat = (e) => {
         let imgStatus = parseInt(e.target.getAttribute("imgstatus"));
@@ -84,25 +85,25 @@ const PickSeat = () => {
         if (seatIndexes.length === 0) {
             message.warn("请选择座位");
             return;
-    }
+        }
 
-    // insertOrder(params)
-    //   .then((res) => {
-    //     navigate("/order-finish", {
-    //       replace: false,
-    //       state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
-    //     });
-    //   })
-    //   .catch((err) => {
-    //         console.log(err);
-    //   });
+        // insertOrder(params)
+        //   .then((res) => {
+        //     navigate("/order-finish", {
+        //       replace: false,
+        //       state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
+        //     });
+        //   })
+        //   .catch((err) => {
+        //         console.log(err);
+        //   });
 
-    JPApi("orders", "post", params, (res) => {
-        navigate("/order-finish", {
-            replace: false,
-            state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
-        });
-    })
+        JPApi("orders", "post", params, (res) => {
+            navigate("/order-finish", {
+                replace: false,
+                state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
+            });
+        })
     };
 
     return (
@@ -114,9 +115,9 @@ const PickSeat = () => {
                 <div>影院： {cinemaInfo.cinemaName}</div>
                 <div>影厅： {session.hallName}</div>
                 <div>放映时间： {session.date}</div>
-        <div>
-          放映时间： {session.startTime} - {session.endTime}
-        </div>
+                <div>
+                    放映时间： {session.startTime} - {session.endTime}
+                </div>
                 <div>单价：￥{price}</div>
             </div>
             <div className="pickSeat_right">
@@ -144,26 +145,29 @@ const PickSeat = () => {
                             <div>银幕中央</div>
                         </div>
                     </div>
-                    <div className="seat_list">
-                        {seatList.map((oneLine, index1) => (
-                            <div className="seat_line" key={index1}>
-                                <div>
-                                    <span>{index1 + 1}</span>
-                  {oneLine.map((s, index2) => (
-                                                <img
-                                                    key={index2}
-                      src={s === "1" ? seat : s === "2" ? sold : seat_checked}
-                                                    imgstatus={s}
-                                                    x={index1 + 1}
-                                                    y={index2 + 1}
-                                                    onClick={clickSeat}
-                                                    alt="我图呢"
-                                                />
-                  ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <table className="seat_list">
+                        <tbody>
+                            {seatList.map((oneLine, index1) => (
+                                <tr className="seat_line" key={index1}>
+
+                                    <td><span>{index1 + 1}</span>
+                                        {oneLine.map((s, index2) => (
+                                            <img
+                                                key={index2}
+                                                src={s === "1" ? seat : s === "2" ? sold : seat_checked}
+                                                imgstatus={s}
+                                                x={index1 + 1}
+                                                y={index2 + 1}
+                                                onClick={clickSeat}
+                                                alt="我图呢"
+                                            />
+                                        ))}
+                                    </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
                 <div className="seat_footer">
                     <div className="seat_footer_msg">
@@ -175,26 +179,26 @@ const PickSeat = () => {
                                 </span>
                             ))}
                         </div>
-            <div>
-              总价：￥
-              <span style={{ fontSize: "20px", lineHeight: "20px" }}>
-                {totalPrice}
-              </span>
-            </div>
+                        <div>
+                            总价：￥
+                            <span style={{ fontSize: "20px", lineHeight: "20px" }}>
+                                {totalPrice}
+                            </span>
+                        </div>
                     </div>
                     <div className="book">
-            <Button
-              type="primary"
-              shape="round"
-              size={size}
-              onClick={bookClick}
-            >
+                        <Button
+                            type="primary"
+                            shape="round"
+                            size={size}
+                            onClick={bookClick}
+                        >
                             确认选座
                         </Button>
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     );
 };
 
