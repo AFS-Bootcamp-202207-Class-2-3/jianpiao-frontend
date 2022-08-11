@@ -1,12 +1,20 @@
 
-import { Button, Form, Input } from 'antd';
+import { Button, Form, message, Input } from 'antd';
 import { React, useEffect, useState } from 'react';
 import { getCinema } from '../../api/cinemaManagement';
+import { updateCinema } from '../../api/cinemaManagement';
 
 export default function CinemaManagementPage() {
 
     const onFinish = (values) => {
         console.log('Success:', values);
+
+        updateCinema(cinema.id, values).then((response) => {
+            message.success("修改成功");
+        })
+            .catch(() => {
+                message.error("修改失败");
+            });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -60,11 +68,11 @@ export default function CinemaManagementPage() {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your address!',
+                                message: '影院地址不为空',
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" />
+                        <Input placeholder={cinema.address} />
                     </Form.Item>
 
                     <Form.Item
@@ -73,11 +81,11 @@ export default function CinemaManagementPage() {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your contactNumber!',
+                                message: '联系电话不可为空',
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" />
+                        <Input placeholder={cinema.contactNumber} />
                     </Form.Item>
 
                     <Form.Item
