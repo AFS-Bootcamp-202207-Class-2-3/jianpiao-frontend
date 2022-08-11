@@ -4,8 +4,8 @@ import AwesomeSwiper from 'react-awesome-swiper';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { getAllFilms } from "../../api/film";
-import banner1 from '../../assets/banner1.jpg';
-import banner2 from '../../assets/banner2.jpg';
+import banner3 from '../../assets/banner3.jpg';
+import banner4 from '../../assets/banner4.jpg';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -41,10 +41,10 @@ const HomePage = () => {
                 <AwesomeSwiper config={config}>
                     <div className="swiper-wrapper">
                         <div className="swiper-slide">
-                            <img src={banner1} alt=""></img>
+                            <img src={banner3} alt=""></img>
                         </div>
                         <div className="swiper-slide">
-                            <img src={banner2} alt=""></img>
+                            <img src={banner4} alt=""></img>
                         </div>
                     </div>
                 </AwesomeSwiper>

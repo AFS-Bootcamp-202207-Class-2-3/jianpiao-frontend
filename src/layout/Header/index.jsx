@@ -1,4 +1,4 @@
-import { DownOutlined, HomeOutlined, ExportOutlined } from "@ant-design/icons";
+import { DownOutlined, HomeOutlined, ExportOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Col, Dropdown, Menu, Row, Space, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import LoginCard from "../../pages/user/LoginCard";
@@ -42,7 +42,7 @@ const Header = () => {
       getItem(
         <span onClick={dispatchLogout}>退出登录</span>,
         "logout",
-        <AppstoreOutlined />
+        <LogoutOutlined />
       ),
     ];
 
