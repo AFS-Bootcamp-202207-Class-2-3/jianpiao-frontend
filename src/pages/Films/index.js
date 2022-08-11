@@ -98,6 +98,7 @@ const Films = () => {
             ></img>
             <div className="file-filmName">{item.filmName}</div>
             <div className="file-score">{item.score}</div>
+            <div style={{color:'#999',textAlign:'center' }}>上映时间{item.releasedTime}</div>
           </div>
         ))}
       </div>
