@@ -14,13 +14,14 @@ export default function FilmManagementPage(props) {
     const formRef = useRef();
     const [form] = Form.useForm()
 
+
+    const getCinemaFilms = async () => {
+        JPApi("admin/films/", "get", { status: "" }, resp => {
+            // console.log(resp.data.data);
+            setfilms(resp.data.data)
+        })
+    }
     useEffect(() => {
-        const getCinemaFilms = async () => {
-            JPApi("admin/films/", "get", { status: "" }, resp => {
-                // console.log(resp.data.data);
-                setfilms(resp.data.data)
-            })
-        }
         getCinemaFilms();
     }, []);
 
@@ -32,7 +33,7 @@ export default function FilmManagementPage(props) {
         if (status === 'update') {
             setBtnState("update")
             setstoreState(record);
-            // console.log(storeState);
+            console.log(storeState);
             form.setFieldsValue(record);
         } else {
             setBtnState("add")
@@ -55,7 +56,6 @@ export default function FilmManagementPage(props) {
         })
         console.log(`selected ${value}`);
     };
-
 
     const onFinish = (values) => {
         const { filmName, introduction, posterUrl, duration, releasedTime, director, leadingActor } = values;
@@ -85,7 +85,7 @@ export default function FilmManagementPage(props) {
                 if (res.data.code === 200) {
                     message.success('修改电影成功', 5)
                     setIsModalVisible(false);
-                    setfilms(films);
+                    getCinemaFilms();
                 }
             })
         }
@@ -114,10 +114,8 @@ export default function FilmManagementPage(props) {
                     message.success('电影成功下架', 5)
                     setIsModalVisible(false);
                 }
-            })
-        }
-   
-        // window.location.reload();
+            })   
+        }     
     }
 
 
@@ -210,7 +208,7 @@ export default function FilmManagementPage(props) {
                 </Form>
             </Modal>
 
-            <Table dataSource={films} rowKey={record => record.film_cinema_id + record.id}>
+            <Table dataSource={films} rowKey={record => record.film_cinema_id + record.id} >
                 <Column title="电影名称" dataIndex="filmName" key="filmName" />
                 <Column title="上映日期" dataIndex="releasedTime" key="releasedTime" />
                 <Column title="时长" dataIndex="duration" key="duration" />
@@ -218,7 +216,6 @@ export default function FilmManagementPage(props) {
                 <Column title="演员" dataIndex="leadingActor" key="leadingActor" />
                 <Column title="电影简介" dataIndex="introduction" key="introduction" />
                 {/* <Column title="电影海报" dataIndex="posterUrl" key="posterUrl" /> */}
-                {/* <Column title="状态" dataIndex="status" key="status" render={(text) => { return text === "showing" ? <span>上映中</span> : <span>已下架</span> }} /> */}
 
                 <Column
                     title="操作"
@@ -226,7 +223,6 @@ export default function FilmManagementPage(props) {
                     render={(_, record) => (
                         <Space size="large">
                             <Button type="primary" onClick={() => showModal(record, "update")}>修改</Button>
-                            {/* <Button type="primary" onClick={() => onChange(record.status === "showing", record)}>{record.status === "showing" ? '下架' : '上架'}</Button> */}
                             <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked={record.status === "showing"} onChange={(checked) => onChange(checked, record)} />
                         </Space>
                     )}
