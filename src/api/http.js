@@ -28,8 +28,8 @@ export const JPApi = (path, method, data, fun) => {
             message.error(e.message)
         }
 
-        if (e.response.data.code === 401) {
-            // todo:跳转登录
-        }
+        // if (e.response.data.code === 401) {
+        //     // todo:跳转登录
+        // }
     })
 }
