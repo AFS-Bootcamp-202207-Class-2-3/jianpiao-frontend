@@ -21,14 +21,21 @@ const Films = () => {
   };
   return (
     <div className="film-list">
+      <div className="title">正在热映</div>
       {films.map((item, index) => (
-        <img
-          src={item.posterUrl}
-          alt={item.filmName}
-          key={index}
+        <div
+          className="file-item"
           onClick={() => clickFilm(item.id)}
-          className="film-img"
-        ></img>
+          key={item.id}
+        >
+          <img
+            src={item.posterUrl}
+            alt={item.filmName}
+            className="film-img"
+          ></img>
+          <div className="file-filmName">{item.filmName}</div>
+          <div className="file-score">{item.score}</div>
+        </div>
       ))}
     </div>
   );
