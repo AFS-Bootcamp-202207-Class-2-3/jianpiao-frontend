@@ -54,13 +54,13 @@ const Header = () => {
       return state.user.isLoginGlobal;
     });
 
-    // 获取sessionStorage userInfo
+    // 获取localStorage userInfo
     useEffect(() => {
-      let sessionStorageUserInfo = sessionStorage.getItem("userInfo");
-      if (sessionStorageUserInfo) {
+      let jpStorageUserInfo = localStorage.getItem("jpUserInfo");
+      if (jpStorageUserInfo) {
         // 已经登录
         // 保存userInfo到redux
-        dispatch(updateUserInfo(JSON.parse(sessionStorageUserInfo)));
+        dispatch(updateUserInfo(JSON.parse(jpStorageUserInfo)));
         // 保存登录状态
         dispatch(updateLoginStatus(true));
       }

@@ -24,7 +24,8 @@ const userSlice = createSlice({
     },
     logout: (state, action) => {
       JPApi("/user/logout", "post", {}, () => {
-        sessionStorage.removeItem("userInfo");
+        localStorage.removeItem("jpUserInfo");
+        localStorage.removeItem("jptoken");
       });
       return { ...state, isLoginGlobal: false, userInfo: {} };
     },

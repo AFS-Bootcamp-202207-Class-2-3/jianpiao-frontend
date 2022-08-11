@@ -40,17 +40,18 @@ const LoginCard = (prop) => {
             password: inputPassword
         };
         const loginOrRegisterSuccess = (resp) =>{
-            // 把response的cookie信息放到浏览器的cookie中
-            const cookies = resp.headers["set-cookie"];
-            if (resp.headers["set-cookie"]) {
-                cookies.forEach(cookie => {
-                    document.cookie = cookie;
-                });
-            }
-            // 写入sessionStorage
-            if(resp.data.data.userInfo){
-                sessionStorage.setItem("userInfo", JSON.stringify(resp.data.data.userInfo));
 
+            // 写入localStorage
+            let jptoken = resp.data.jptoken;
+            if(jptoken){
+                localStorage.setItem('jptoken', jptoken);
+            }else {
+                message.error("未能得到用户凭证，请调试网络");
+            }
+
+            // 写入localStorage
+            if(resp.data.data.userInfo){
+                localStorage.setItem("jpUserInfo", JSON.stringify(resp.data.data.userInfo));
                 // 写入redux
                 dispatch(updateUserInfo(resp.data.data.userInfo));
 

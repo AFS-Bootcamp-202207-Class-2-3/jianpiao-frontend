@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { getFilmById } from '../../api/film';
 import moment from 'moment';
+import {JPApi} from "../../api/http";
 
 export default function FilmDetailPage() {
   const navigate = useNavigate();
@@ -13,11 +14,9 @@ export default function FilmDetailPage() {
   const [film, setFilm] = useState({});
 
   useEffect(() => {
-    const getFilm = async () => {
-      const res = await getFilmById(param.id);
-      setFilm(res.data.film);
-    };
-    getFilm();
+    JPApi(`/films/${param.id}`, "get", {}, resp => {
+      setFilm(resp.data.film);
+    })
   }, [param.id]);
 
   const toCinemaPage = () => {
