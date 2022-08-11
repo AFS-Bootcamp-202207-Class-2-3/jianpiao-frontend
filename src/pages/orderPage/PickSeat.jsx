@@ -6,8 +6,8 @@ import seat_checked from "../../assets/seat-checked.png";
 import { useState } from "react";
 import { getSeats } from "../../api/pickSeat";
 import { Button, message } from "antd";
-import { insertOrder } from "../../api/order";
 import { useNavigate, useLocation } from "react-router-dom";
+import {JPApi} from "../../api/http";
 
 const PickSeat = () => {
 
@@ -47,7 +47,7 @@ const PickSeat = () => {
         let x = e.target.getAttribute("x");
         let y = e.target.getAttribute("y");
         let tempArray = [...seatChosen];
-        
+
         if (imgStatus === 1) {
             e.target.setAttribute("imgstatus", 3);
             e.target.src = seat_checked;
@@ -86,17 +86,24 @@ const PickSeat = () => {
             return;
     }
 
-    insertOrder(params)
-      .then((res) => {
+    // insertOrder(params)
+    //   .then((res) => {
+    //     navigate("/order-finish", {
+    //       replace: false,
+    //       state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
+    //     });
+    //   })
+    //   .catch((err) => {
+    //         console.log(err);
+    //   });
+
+    JPApi("orders", "post", params, (res) => {
         navigate("/order-finish", {
-          replace: false,
-          state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
+            replace: false,
+            state: { orderInfo: res.data.data, cinemaInfo: cinemaInfo },
         });
-      })
-      .catch((err) => {
-            console.log(err);
-      });
-  };
+    })
+    };
 
     return (
         <div className="pickSeat_container">
