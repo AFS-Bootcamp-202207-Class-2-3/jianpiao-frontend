@@ -42,7 +42,6 @@ const Cinema = () => {
       {filmId ? <FilmIntroduction filmId={filmId} /> : ""}
       <CinemaList
         cinemaList={cinemaList}
-        className="cinema-list"
         toBuyTicket={toBuyTicket}
       />
     </div>
