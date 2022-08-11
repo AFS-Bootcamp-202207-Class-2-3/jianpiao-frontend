@@ -65,9 +65,24 @@ const SessionManagementPage = () => {
     setIsModalVisible(false);
   };
 
-  const handleSubmit = (session) => {
-    debugger;
-    console.log(session);
+  const addSession = (session) => {
+    JPApi(
+      "sessions",
+      "post",
+      {
+        cinemaId: cinema.id,
+        filmId: session.film,
+        hallId: session.hall,
+        date: session.date,
+        startTime: session.startTime,
+        endTime: session.endTime,
+        price: session.price,
+      },
+      (response) => {
+        message.success("新增成功！");
+        setData([...data, response.data.data]);
+      }
+    );
   };
 
   const columns = [
@@ -126,7 +141,7 @@ const SessionManagementPage = () => {
             wrapperCol={{
               span: 15,
             }}
-            onFinish={handleSubmit}
+            onFinish={addSession}
             form={form}
           >
             <Form.Item name="film" label="电影">
@@ -138,7 +153,7 @@ const SessionManagementPage = () => {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item name="cinema" label="影厅">
+            <Form.Item name="hall" label="影厅">
               <Select>
                 {halls.map((hall) => (
                   <Option key={hall.id} value={hall.id}>
@@ -168,7 +183,11 @@ const SessionManagementPage = () => {
           </Form>
         </Modal>
       </Space>
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowKey={(record) => record.id}
+      />
     </div>
   );
 };
