@@ -1,12 +1,19 @@
 import React from 'react';
 import "./filmlist.css";
+import { useState } from "react";
 import { Row, Col, Rate } from 'antd';
 
 const FilmList = (props) => {
     const films = props.films;
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const clickFilm = (id) => {
         props.clickFilm(id);
     }
+    
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize.bind(this));
 
     return (
         <div className='film-list'>
@@ -17,7 +24,7 @@ const FilmList = (props) => {
                         className="film-item"
                         onClick={() => clickFilm(item.id)}
                         key={item.id}
-                        span={4}
+                        span={windowWidth > 1600 ? 4 : 6}
                     >
                         <div>
                             <img
