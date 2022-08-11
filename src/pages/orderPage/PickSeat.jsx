@@ -48,6 +48,10 @@ const PickSeat = () => {
         let x = e.target.getAttribute("x");
         let y = e.target.getAttribute("y");
         let tempArray = [...seatChosen];
+        if (tempArray.length >= 4) {
+            message.error("一次最多购买四张票");
+            return;
+        }
 
         if (imgStatus === 1) {
             e.target.setAttribute("imgstatus", 3);
@@ -152,15 +156,17 @@ const PickSeat = () => {
 
                                     <td><span>{index1 + 1}</span>
                                         {oneLine.map((s, index2) => (
-                                            <img
+                                            // s === "2" ? (<div className="space" ></div>) :
+                                            (<img
                                                 key={index2}
+
                                                 src={s === "1" ? seat : s === "2" ? sold : seat_checked}
                                                 imgstatus={s}
                                                 x={index1 + 1}
                                                 y={index2 + 1}
                                                 onClick={clickSeat}
-                                                alt="我图呢"
-                                            />
+                                                alt=""
+                                            />)
                                         ))}
                                     </td>
 

@@ -139,3 +139,12 @@
   width: 150px;
   border-radius: 40px;
 }
+
+.space {
+  width: 30px;
+  height: 25px;
+  display: inline;
+  position: relative;
+  margin-right: 18px;
+  margin-left: 18px;
+}
