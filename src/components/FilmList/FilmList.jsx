@@ -25,7 +25,7 @@ const FilmList = (props) => {
                         key={item.id}
                         span={windowWidth > 1600 ? 4 : 6}
                     >
-                        <div>
+                        <div className='film-item-box'>
                             <img
                                 src={item.posterUrl}
                                 alt={item.filmName}
