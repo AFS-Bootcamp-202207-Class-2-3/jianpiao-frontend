@@ -1,19 +1,19 @@
-import NotFoundPage from "./pages/NotFoundPage";
-import Layout from "./layout/Layout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Films from "./pages/Films";
+import BackStageLayout from "./layout/BackStage/BackStageLayout";
+import Layout from "./layout/Layout";
+import CinemaDetailPage from "./pages/CinemaDetailPage";
+import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
+import Cinema from "./pages/CinemaPage/Cinema";
 import FilmDetailPage from "./pages/filmDetailPage";
+import FilmManagement from "./pages/FilmManagement/FilmManagementPage";
+import Films from "./pages/Films";
+import HallManagementPage from "./pages/HallManagement/HallManagementPage";
 import HomePage from "./pages/HomePage";
-import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
 import PickSeat from "./pages/orderPage/PickSeat";
-import Cinema from "./pages/CinemaPage/Cinema";
-import CinemaDetailPage from "./pages/CinemaDetailPage";
-import HallManagementPage from "./pages/HallManagement/HallManagementPage";
-import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
-import BackStageLayout from "./layout/BackStage/BackStageLayout";
-import FilmManagement from "./pages/FilmManagement/FilmManagementPage";
+import PersonalCenterPage from "./pages/PersonalCenter/PersonalCenterPage";
 import SessionManagementPage from "./pages/SessionManagementPage/SessionManagementPage";
 
 function App() {
@@ -39,12 +39,11 @@ function App() {
           <Route path="/back-stage/hall" element={<HallManagementPage />} />
           <Route path="/back-stage/cinema" element={<CinemaManagementPage />} />
           <Route path="/back-stage/film" element={<FilmManagement />} />
+          <Route
+            path="/back-stage/session"
+            element={<SessionManagementPage />}
+          />
         </Route>
-        <Route
-                    path="/back-stage/session"
-                    element={<SessionManagementPage />}
-                  />
-                </Route>
       </Routes>
     </BrowserRouter>
   );

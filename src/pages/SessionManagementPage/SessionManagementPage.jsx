@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { JPApi } from "../../api/http";
 
 const SessionManagementPage = () => {
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem("jpUserInfo"));
   const [data, setData] = useState([]);
   const [cinema, setCinema] = useState({});
   const [films, setFilms] = useState([]);
@@ -21,6 +21,7 @@ const SessionManagementPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Option } = Select;
   const [form] = Form.useForm();
+
   useEffect(() => {
     JPApi(`/user/${userInfo.id}/sessions`, "get", {}, (response) => {
       setData([...response.data.data]);
