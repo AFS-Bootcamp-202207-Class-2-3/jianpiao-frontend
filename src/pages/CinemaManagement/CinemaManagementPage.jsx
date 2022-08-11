@@ -8,12 +8,6 @@ export default function CinemaManagementPage() {
     const onFinish = (values) => {
         console.log('Success:', values);
 
-        // updateCinema(cinema.id, values).then((response) => {
-        //     message.success("修改成功");
-        // })
-        //     .catch(() => {
-        //         message.error("修改失败");
-        //     });
         JPApi("/admin/cinema/"+cinema.id,"put", values, (res) => {
             message.success("修改成功");
 

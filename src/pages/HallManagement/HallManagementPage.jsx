@@ -1,8 +1,7 @@
 
 import { Button, Form, Input, Modal, Space, Table } from 'antd';
 import { React, useEffect, useState } from 'react';
-import { getAllHallsByCinemaId } from '../../api/hall';
-import { addHall } from '../../api/hall';
+import { JPApi } from '../../api/http';
 
 const { Column } = Table;
 
@@ -14,11 +13,11 @@ export default function HallManagementPage() {
     const [halls, setHalls] = useState([]);
 
     useEffect(() => {
-        const getHalls = async () => {
-            const res = await getAllHallsByCinemaId();
-            setHalls(res.data.data);
-        };
-        getHalls();
+        JPApi("/admin/halls","get", {}, (res) => {
+
+            setHalls(res.data.data)
+
+        })
     }, []);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,10 +27,9 @@ export default function HallManagementPage() {
     };
 
     const handleOk = () => {
-        addHall(text).then((response) => {
-            setHalls([...halls, response.data.data])
-        });
-
+        JPApi("/admin/halls/"+text,"get", {}, (res) => {
+            setHalls([...halls, res.data.data]);
+        })
         setIsModalVisible(false);
     };
 
@@ -61,7 +59,7 @@ export default function HallManagementPage() {
 
                     </Form>
                 </Modal>
-                <Table dataSource={halls}>
+                <Table dataSource={halls} rowKey={record => record.id}>
                     <Column title="影厅名称" dataIndex="name" key="name" />
 
                     <Column
