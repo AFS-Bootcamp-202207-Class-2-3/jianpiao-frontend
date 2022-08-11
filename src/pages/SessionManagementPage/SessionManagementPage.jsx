@@ -1,14 +1,13 @@
 import {
   Button,
-  DatePicker,
   Form,
+  Input,
   InputNumber,
   message,
   Modal,
   Select,
   Space,
   Table,
-  TimePicker,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { JPApi } from "../../api/http";
@@ -16,6 +15,9 @@ import { JPApi } from "../../api/http";
 const SessionManagementPage = () => {
   const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
   const [data, setData] = useState([]);
+  const [cinema, setCinema] = useState({});
+  const [films, setFilms] = useState([]);
+  const [halls, setHalls] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -23,8 +25,23 @@ const SessionManagementPage = () => {
     JPApi(`/user/${userInfo.id}/sessions`, "get", {}, (response) => {
       setData([...response.data.data]);
     });
+    JPApi("admin/cinema", "get", {}, (response) => {
+      setCinema({ ...response.data.data });
+    });
     // eslint-disable-next-line
   }, []);
+
+  const getFilmsByCinemaId = () => {
+    JPApi(`cinemas/${cinema.id}/showingFilms`, "get", {}, (response) => {
+      setFilms([...response.data.data]);
+    });
+  };
+
+  const getHallByCinemaId = () => {
+    JPApi(`admin/halls`, "get", {}, (response) => {
+      setHalls([...response.data.data]);
+    });
+  };
 
   const deleteSession = (sessionId) => {
     JPApi(`sessions/${sessionId}`, "delete", {}, () => {
@@ -35,6 +52,8 @@ const SessionManagementPage = () => {
 
   const showModal = () => {
     setIsModalVisible(true);
+    getFilmsByCinemaId();
+    getHallByCinemaId();
   };
 
   const handleOk = () => {
@@ -112,34 +131,30 @@ const SessionManagementPage = () => {
           >
             <Form.Item name="film" label="电影">
               <Select>
-                <Option value="demo">1</Option>
+                {films.map((film) => (
+                  <Option key={film.id} value={film.id}>
+                    {film.filmName}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item name="cinema" label="影厅">
               <Select>
-                <Option value="demo">1</Option>
+                {halls.map((hall) => (
+                  <Option key={hall.id} value={hall.id}>
+                    {hall.name}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item name="date" label="放映日期">
-              <DatePicker
-                style={{
-                  width: "100%",
-                }}
-              />
+              <Input />
             </Form.Item>
             <Form.Item name="startTime" label="开始时间">
-              <TimePicker
-                style={{
-                  width: "100%",
-                }}
-              />
+              <Input />
             </Form.Item>
             <Form.Item name="endTime" label="结束时间">
-              <TimePicker
-                style={{
-                  width: "100%",
-                }}
-              />
+              <Input />
             </Form.Item>
             <Form.Item name="price" label="价格">
               <InputNumber
