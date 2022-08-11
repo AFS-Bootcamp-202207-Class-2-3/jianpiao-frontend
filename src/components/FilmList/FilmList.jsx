@@ -22,7 +22,6 @@ const FilmList = (props) => {
                 films.map((item, index) =>
                     <Col
                         className="film-item"
-                        onClick={() => clickFilm(item.id)}
                         key={item.id}
                         span={windowWidth > 1600 ? 4 : 6}
                     >
@@ -31,17 +30,18 @@ const FilmList = (props) => {
                                 src={item.posterUrl}
                                 alt={item.filmName}
                                 className="film-img"
+                                onClick={() => clickFilm(item.id)}
                             ></img>
                             <div className='film-info'>
                                 <div className='film-name'>{item.filmName}</div>
                                 <div className='film-score'>
-                                    <Rate allowHalf defaultValue={item.score} />
+                                    {props.isNotShowing ? <></> : <Rate allowHalf defaultValue={item.score} disabled/>}
                                     {item.score === null ? "暂无评分" : item.score + "分"}
                                 </div>
                                 {
-                                    props.showReleasedTime ? 
-                                    <div style={{color:'#999',textAlign:'center' }}>上映时间{item.releasedTime}</div> :
-                                    <></>
+                                    props.isNotShowing ? 
+                                     <div style={{color:'#999',textAlign:'center' }}>上映时间{item.releasedTime}</div> : <></>
+
                                 }
                             </div>
                         </div>

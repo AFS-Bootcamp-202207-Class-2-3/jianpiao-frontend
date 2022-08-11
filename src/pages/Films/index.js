@@ -75,7 +75,7 @@ const Films = () => {
         <FilmList
           films={comingFilms}
           clickFilm={clickFilm}
-          showReleasedTime={true}
+          isNotShowing={true}
         ></FilmList>
       </div>
     </div>
