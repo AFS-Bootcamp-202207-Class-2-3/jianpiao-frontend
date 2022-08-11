@@ -17,6 +17,12 @@ const LoginCard = (prop) => {
         setIsLogin(!isLogin);
     }
 
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const switchAdminOnChange = (e) => {
+        setIsAdmin(!isAdmin);
+    }
+
     const [inputUsername, setInputUsername] = useState('');
     const onInputUsernameChange = (e) => {
         setInputUsername(e.target.value);
@@ -30,6 +36,11 @@ const LoginCard = (prop) => {
     const [inputCheckPassword, setInputCheckPassword] = useState('');
     const onInputCheckPasswordChange = (e) => {
         setInputCheckPassword(e.target.value);
+    }
+
+    const [inputInvitationCode, setInputInvitationCode] = useState('');
+    const onInputInvitationCodeChange = (e) => {
+        setInputInvitationCode(e.target.value);
     }
 
     const dispatch = useDispatch();
@@ -69,8 +80,14 @@ const LoginCard = (prop) => {
                 alert('请输入用户名、密码和确认密码');
             } else if (inputPassword !== inputCheckPassword) {
                 alert('两次密码不一致');
+            } else if(isAdmin && inputInvitationCode === ''){
+                alert('邀请码不能为空');
             } else {
-                JPApi("/user/register", "post", user, loginOrRegisterSuccess);
+                if(isAdmin){
+                    JPApi("/admin/users/register", "post", user, loginOrRegisterSuccess);
+                }else{
+                    JPApi("/user/register", "post", user, loginOrRegisterSuccess);
+                }
             }
         }
     }
@@ -78,7 +95,7 @@ const LoginCard = (prop) => {
     return (
         <>
             <Modal
-                title={<LoginCardHeader isLogin={isLogin}/>}
+                title={<LoginCardHeader isLogin={isLogin} isAdmin={isAdmin}/>}
                 centered
                 visible={prop.modal2Visible}
                 onOk={onConfirm}
@@ -87,10 +104,15 @@ const LoginCard = (prop) => {
                 <div style={{"margin": "0 30px"}}>
                     <Input type="text" placeholder='请输入账号' onChange={onInputUsernameChange}/>
                     <Input type="password" placeholder='请输入密码' onChange={onInputPasswordChange}/>
-                    {isLogin ? (<></>) : (
-                        <Input type='password' placeholder='请输入确认密码' onChange={onInputCheckPasswordChange}/>)}
+                    {isLogin ?
+                        null :
+                        <Input type="password" placeholder='请输入确认密码' onChange={onInputCheckPasswordChange}/>
+                    }
+                    {isAdmin && !isLogin? <Input type="text" placeholder='请输入影院验证邀请码' onChange={onInputInvitationCodeChange}/> : null}
+
                 </div>
                 <div>
+                    <Switch checkedChildren="我是影院管理员" unCheckedChildren="我是用户" onChange={switchAdminOnChange}/>
                     <Switch checkedChildren="去登录" unCheckedChildren="去注册" onChange={switchOnChange}/>
                 </div>
             </Modal>
