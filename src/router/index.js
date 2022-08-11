@@ -1,7 +1,7 @@
 import {
   AppstoreOutlined,
   HomeOutlined,
-  SettingOutlined,
+  ShopOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function getItem(label, key, icon, children, type) {
 const routes = [
   getItem(<Link to="/">首页</Link>, "homepage", <HomeOutlined />),
   getItem(<Link to="/films">电影</Link>, "films", <AppstoreOutlined />),
-  getItem(<Link to="/cinemas">影院</Link>, "cinemas", <SettingOutlined />),
+  getItem(<Link to="/cinemas">影院</Link>, "cinemas", <ShopOutlined />),
 ];
 
 const userMenu = [

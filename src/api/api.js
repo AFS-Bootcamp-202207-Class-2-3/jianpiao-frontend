@@ -2,7 +2,6 @@ import axios from "axios";
 
 let baseURL = "http://localhost:8080/";
 const env = JSON.stringify(process.env);
-
 if (env.indexOf("jianpiao-frontend-staging") !== -1) {
   baseURL = "https://jianpiao-backend-staging.herokuapp.com/";
 } else if (env.indexOf("jianpiao-frontend-production") !== -1) {
@@ -10,7 +9,7 @@ if (env.indexOf("jianpiao-frontend-staging") !== -1) {
 }
 const api = axios.create({
   baseURL: baseURL,
-  withCredentials: true
+  withCredentials: true,
 });
 
 export default api;
