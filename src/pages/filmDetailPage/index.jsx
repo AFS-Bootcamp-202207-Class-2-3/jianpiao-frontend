@@ -3,7 +3,6 @@ import './FilmDetailPage.css';
 import { Button } from 'antd';
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { getFilmById } from '../../api/film';
 import moment from 'moment';
 import {JPApi} from "../../api/http";
 
