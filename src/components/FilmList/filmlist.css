@@ -1,0 +1,32 @@
+
+.film-list img{
+    width: 180px;
+    height: 250px;
+    margin-bottom: 10px;
+}
+
+.film-list .film-item{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.film-list .film-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.film-list .film-info .film-name {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.film-list .film-info .film-score {
+    font-size: 12px;
+    color: rgb(112, 114, 114);
+    padding-left: 5px;
+}
+
+.film-img {
+    cursor: pointer;
+}

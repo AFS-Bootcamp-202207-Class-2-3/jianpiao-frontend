@@ -87,6 +87,7 @@ const Header = () => {
         </Col>
         <Col className="nav" span={16}>
           <Menu
+            style={{width: "400px"}}
             defaultSelectedKeys={['homepage']}
             mode="horizontal"
             onClick={clickMenu}

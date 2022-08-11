@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { getAllFilms } from "../../api/film";
 import banner3 from '../../assets/banner3.jpg';
 import banner4 from '../../assets/banner4.jpg';
+import FilmList from '../../components/FilmList/FilmList';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -51,25 +52,7 @@ const HomePage = () => {
             </div>
             <div className='film-box'>
                 <p className='title'>正在上映</p>
-                <div className='film-list'>
-                    {
-                        films.map((item, index) =>
-                            <div
-                                className="file-item"
-                                onClick={() => clickFilm(item.id)}
-                                key={item.id}
-                            >
-                                <img
-                                    src={item.posterUrl}
-                                    alt={item.filmName}
-                                    className="film-img"
-                                ></img>
-                                <div className="file-filmName">{item.filmName}</div>
-                                <div className="file-score">{item.score}</div>
-                            </div>
-                        )
-                    }
-                </div>
+                <FilmList films={films} clickFilm={clickFilm}></FilmList>
             </div>
         </div>
     );

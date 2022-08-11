@@ -1,19 +1,8 @@
 
 .back-stage-row {
-    margin: 0 15%;
+    margin: 30px;
 }
 
-@media screen and (max-width: 1200px){
-    .back-stage-row {
-        margin: 0 5%;
-    }
-}
-
-@media screen and (max-width: 1600px){
-    .back-stage-row {
-        margin: 0 8%;
-    }
-}
 .back-stage-content {
     padding: 20px 30px;
     flex: 1;

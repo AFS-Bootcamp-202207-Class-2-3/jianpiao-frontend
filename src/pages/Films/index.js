@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getAllFilms } from "../../api/film";
+import FilmList from "../../components/FilmList/FilmList";
 import "./films.css";
 
 const Films = () => {
@@ -68,39 +69,14 @@ const Films = () => {
         </span>
       </div>
       <div className={chooseShowing ? "" : "display"}>
-        {showingFilms.map((item) => (
-          <div
-            className="file-item"
-            onClick={() => clickFilm(item.id)}
-            key={item.id}
-          >
-            <img
-              src={item.posterUrl}
-              alt={item.filmName}
-              className="film-img"
-            ></img>
-            <div className="file-filmName">{item.filmName}</div>
-            <div className="file-score">{item.score}</div>
-          </div>
-        ))}
+        <FilmList films={showingFilms} clickFilm={clickFilm}></FilmList>
       </div>
       <div className={chooseShowing ? "display" : ""}>
-        {comingFilms.map((item) => (
-          <div
-            className="file-item"
-            onClick={() => clickFilm(item.id)}
-            key={item.id}
-          >
-            <img
-              src={item.posterUrl}
-              alt={item.filmName}
-              className="film-img"
-            ></img>
-            <div className="file-filmName">{item.filmName}</div>
-            <div className="file-score">{item.score}</div>
-            <div style={{color:'#999',textAlign:'center' }}>上映时间{item.releasedTime}</div>
-          </div>
-        ))}
+        <FilmList
+          films={comingFilms}
+          clickFilm={clickFilm}
+          showReleasedTime={true}
+        ></FilmList>
       </div>
     </div>
   );
