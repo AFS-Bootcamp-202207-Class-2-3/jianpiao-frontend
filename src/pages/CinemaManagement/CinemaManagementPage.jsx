@@ -1,34 +1,38 @@
 
 import { Button, Form, message, Input } from 'antd';
 import { React, useEffect, useState } from 'react';
-import { getCinema } from '../../api/cinemaManagement';
-import { updateCinema } from '../../api/cinemaManagement';
+import { JPApi } from '../../api/http';
 
 export default function CinemaManagementPage() {
 
     const onFinish = (values) => {
         console.log('Success:', values);
 
-        updateCinema(cinema.id, values).then((response) => {
+        // updateCinema(cinema.id, values).then((response) => {
+        //     message.success("修改成功");
+        // })
+        //     .catch(() => {
+        //         message.error("修改失败");
+        //     });
+        JPApi("/admin/cinema/"+cinema.id,"put", values, (res) => {
             message.success("修改成功");
-        })
-            .catch(() => {
-                message.error("修改失败");
-            });
+
+        }
+        )
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const [cinema, setHalls] = useState([]);
+    const [cinema, setHalls] = useState({});
 
     useEffect(() => {
-        const getHalls = async () => {
-            const res = await getCinema();
-            setHalls(res.data.data);
-        };
-        getHalls();
+        JPApi("/admin/cinema","get", {}, (res) => {
+
+            setHalls(res.data.data)
+
+        })
     }, []);
 
     return (
@@ -53,7 +57,8 @@ export default function CinemaManagementPage() {
                         span: 12,
                     }}
                     initialValues={{
-                        remember: true,
+                        address: cinema.address,
+                        contactNumber: cinema.contactNumber
                     }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}

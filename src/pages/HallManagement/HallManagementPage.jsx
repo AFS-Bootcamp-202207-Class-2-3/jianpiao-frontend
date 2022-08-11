@@ -44,7 +44,6 @@ export default function HallManagementPage() {
                 <Button type="primary" onClick={showModal}>
                     添加影厅
                 </Button>
-                <div style={{ width: 700, display: "inline-block" }} ></div>
                 <Modal title="添加影厅" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <Form
                         name="basic"
@@ -68,6 +67,7 @@ export default function HallManagementPage() {
                     <Column
                         title=""
                         key="action"
+                        dataIndex="action"
                         render={(_, record) => (
                             <Space size="middle">
                             </Space>
