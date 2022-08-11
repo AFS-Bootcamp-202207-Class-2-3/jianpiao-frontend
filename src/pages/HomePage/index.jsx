@@ -1,9 +1,9 @@
 import React from 'react';
 import "./homepage.css";
 import AwesomeSwiper from 'react-awesome-swiper';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import {getAllFilms} from "../../api/film";
+import { getAllFilms } from "../../api/film";
 import banner1 from '../../assets/banner1.jpg';
 import banner2 from '../../assets/banner2.jpg';
 
@@ -20,41 +20,53 @@ const HomePage = () => {
     }, []);
 
     const config = {
-        loop : true,
+        loop: true,
         autoplay: {
-          delay: 3000,
-          stopOnLastSlide: false,
-          disableOnInteraction: true,
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: true,
         },
         preloadImages: false,
         lazy: true,
         speed: 500,
-      };
+    };
 
-      const clickFilm = (id) => {
-        navigate('/films/'+id);
-      }
+    const clickFilm = (id) => {
+        navigate('/films/' + id);
+    }
 
     return (
         <div>
             <div className='slide'>
-            <AwesomeSwiper config={config}>
-                <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                        <img src={banner1} alt=""></img>
+                <AwesomeSwiper config={config}>
+                    <div className="swiper-wrapper">
+                        <div className="swiper-slide">
+                            <img src={banner1} alt=""></img>
+                        </div>
+                        <div className="swiper-slide">
+                            <img src={banner2} alt=""></img>
+                        </div>
                     </div>
-                    <div className="swiper-slide">
-                        <img src={banner2} alt=""></img>
-                    </div>
-                </div>
-            </AwesomeSwiper>
+                </AwesomeSwiper>
             </div>
             <div className='film-box'>
                 <p className='title'>正在上映</p>
                 <div className='film-list'>
                     {
                         films.map((item, index) =>
-                            <img src={item.posterUrl} alt={item.filmName} key={index} onClick={() => clickFilm(item.id)} className="film-img"></img>
+                            <div
+                                className="file-item"
+                                onClick={() => clickFilm(item.id)}
+                                key={item.id}
+                            >
+                                <img
+                                    src={item.posterUrl}
+                                    alt={item.filmName}
+                                    className="film-img"
+                                ></img>
+                                <div className="file-filmName">{item.filmName}</div>
+                                <div className="file-score">{item.score}</div>
+                            </div>
                         )
                     }
                 </div>
