@@ -48,16 +48,19 @@ const PickSeat = () => {
         let x = e.target.getAttribute("x");
         let y = e.target.getAttribute("y");
         let tempArray = [...seatChosen];
-        if (tempArray.length >= 4) {
-            message.error("一次最多购买四张票");
-            return;
-        }
+
 
         if (imgStatus === 1) {
+            if (tempArray.length >= 4) {
+                message.error("一次最多购买四张票");
+                return;
+            }
             e.target.setAttribute("imgstatus", 3);
             e.target.src = seat_checked;
             tempArray.push({ x: x, y: y });
+
             setTotalPrice((price * tempArray.length).toFixed(2));
+
         } else if (imgStatus === 3) {
             e.target.setAttribute("imgstatus", 1);
             e.target.src = seat;
@@ -156,7 +159,7 @@ const PickSeat = () => {
 
                                     <td><span>{index1 + 1}</span>
                                         {oneLine.map((s, index2) => (
-                                            // s === "2" ? (<div className="space" ></div>) :
+                                            // s === "2" ? (<div className="space" key={index2} ></div>) :
                                             (<img
                                                 key={index2}
 

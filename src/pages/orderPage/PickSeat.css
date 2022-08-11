@@ -141,10 +141,10 @@
 }
 
 .space {
-  width: 30px;
+  width: 25px;
   height: 25px;
-  display: inline;
+  display: inline-block;
   position: relative;
-  margin-right: 18px;
-  margin-left: 18px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
