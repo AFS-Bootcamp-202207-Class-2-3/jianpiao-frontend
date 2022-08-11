@@ -4,34 +4,33 @@ import { React, useEffect, useState } from 'react';
 import { JPApi } from '../../api/http';
 
 export default function CinemaManagementPage() {
+    const [cinema, setCinema] = useState({});
+    const [form] = Form.useForm()
 
     const onFinish = (values) => {
-        console.log('Success:', values);
 
         JPApi("/admin/cinema/"+cinema.id,"put", values, (res) => {
             message.success("修改成功");
-
-        }
-        )
+        })
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const [cinema, setHalls] = useState({});
-
     useEffect(() => {
+
         JPApi("/admin/cinema","get", {}, (res) => {
-
-            setHalls(res.data.data)
-
+            const resCinema = res.data.data;
+            setCinema(resCinema);
+            form.setFieldsValue(resCinema);
         })
-    }, []);
+    }, [form]);
 
+    
     return (
         <div>
-
+            
             <div style={{ width: '100%', display: "inline-block" }} >
 
                 <h1>
@@ -44,6 +43,7 @@ export default function CinemaManagementPage() {
 
                 <Form
                     name="basic"
+                    form={form}
                     labelCol={{
                         span: 4,
                     }}
