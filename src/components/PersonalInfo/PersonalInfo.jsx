@@ -9,15 +9,14 @@ const PersonalInfo = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem("jpUserInfo"));
 
-  console.log(userInfo);
   const handleSubmit = (updatedUser) => {
     setLoading(true);
     updateUser(userInfo.id, updatedUser)
       .then((response) => {
         const storageUnserInfo = { ...userInfo, ...response.data.data };
-        sessionStorage.setItem("userInfo", JSON.stringify(storageUnserInfo));
+        localStorage.setItem("jpUserInfo", JSON.stringify(storageUnserInfo));
         dispatch(updateUserInfo(storageUnserInfo));
         setLoading(false);
         message.success("修改成功");

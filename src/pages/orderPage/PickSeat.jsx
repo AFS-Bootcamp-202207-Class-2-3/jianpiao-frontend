@@ -16,30 +16,41 @@ const PickSeat = () => {
     const [seatList, setSeatList] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [seatChosen, setSeatChosen] = useState([]);
+    const [filmInfo, setFilmInfo] = useState({});
+    const [session, setSession] = useState({});
+    const [cinemaInfo, setCinemaInfo] = useState({})
     // eslint-disable-next-line
     const [size, setSize] = useState("large");
     const navigate = useNavigate();
     const location = useLocation();
-    const { filmInfo, session, cinemaInfo } = location.state;
-
+    
     useEffect(() => {
-        getSeats(session.id).then((res) => {
-            let temp_seatList = [];
-            for (var i = 0; i < m; i++) {
-                temp_seatList[i] = [];
-            }
-            let site = res.data.data.site;
-            let index = 0;
-            for (let idx = 0; idx < site.length; ++idx) {
-                if (idx > 0 && idx % 11 === 0) {
-                    index++;
+        if (location.state !== null) {
+            const { filmInfo, session, cinemaInfo } = location.state;
+            setFilmInfo(filmInfo);
+            setSession(session);
+            setCinemaInfo(cinemaInfo);
+        
+            getSeats(session.id).then((res) => {
+                let temp_seatList = [];
+                for (var i = 0; i < m; i++) {
+                    temp_seatList[i] = [];
                 }
+                let site = res.data.data.site;
+                let index = 0;
+                for (let idx = 0; idx < site.length; ++idx) {
+                    if (idx > 0 && idx % 11 === 0) {
+                        index++;
+                    }
 
-                temp_seatList[index].push(site[idx]);
-            }
-            setPrice(res.data.data.price);
-            setSeatList(temp_seatList);
-        });
+                    temp_seatList[index].push(site[idx]);
+                }
+                setPrice(res.data.data.price);
+                setSeatList(temp_seatList);
+            });
+    } else {
+        navigate('/');
+    }
         // eslint-disable-next-line
     }, []);
 

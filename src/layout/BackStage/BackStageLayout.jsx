@@ -10,9 +10,8 @@ const BackStageLayout = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-        let user = JSON.parse(sessionStorage.getItem("userInfo"));
+        let user = JSON.parse(localStorage.getItem("jpUserInfo"));
         if (user === null ||user.roles === undefined || !user.roles.includes("cinema-admin")) {
-            console.log(456);
             navigate("/");
         }
     });
@@ -24,7 +23,7 @@ const BackStageLayout = () => {
                 <Col>
                     <SideMenu></SideMenu>
                 </Col>
-                <Col>
+                <Col style={{flex: 1}}>
                 <div className="back-stage-content">
                     <Outlet />
                 </div>
