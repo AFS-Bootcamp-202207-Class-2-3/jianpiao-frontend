@@ -10,6 +10,9 @@ import OrderFinishPage from "./pages/OrderFinishPage/OrderFinishPage";
 import PickSeat from "./pages/orderPage/PickSeat";
 import Cinema from "./pages/CinemaPage/Cinema";
 import CinemaDetailPage from "./pages/CinemaDetailPage";
+import HallManagementPage from "./pages/HallManagement/HallManagementPage";
+import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
+import BackStageLayout from "./layout/BackStage/BackStageLayout";
 
 function App() {
   return (
@@ -26,6 +29,11 @@ function App() {
           <Route path="/pick-seat" element={<PickSeat />} />
           <Route path="/cinemas/:cinemaId" element={<CinemaDetailPage />} />
           <Route path="/cinemas" element={<Cinema />} />
+          <Route path="/hall" element={<HallManagementPage />} />
+          <Route path="/cinema-admin" element={<CinemaManagementPage />} />
+        </Route>
+        <Route path="/back-stage" element={<BackStageLayout />}>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

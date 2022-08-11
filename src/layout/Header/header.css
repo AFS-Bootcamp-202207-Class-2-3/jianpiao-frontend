@@ -23,6 +23,14 @@
     border-radius: 50%;
 }
 
+.header .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .nav .to-back-btn {
+    border-radius: 30px;
+}
 .header .ant-menu-horizontal {
     border: none;
 }

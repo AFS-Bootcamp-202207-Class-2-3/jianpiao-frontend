@@ -1,8 +1,9 @@
-import { DownOutlined, HomeOutlined } from "@ant-design/icons";
-import { Col, Dropdown, Menu, Row, Space } from "antd";
+import { DownOutlined, HomeOutlined, ExportOutlined } from "@ant-design/icons";
+import { Col, Dropdown, Menu, Row, Space, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import LoginCard from "../../pages/user/LoginCard";
 import { routes, getItem } from "../../router";
+import { useNavigate, useLocation  } from "react-router-dom";
 import "./header.css";
 import {
   updateLoginStatus,
@@ -20,6 +21,8 @@ const Header = () => {
     };
 
     const userInfo = useSelector(state => state.user.userInfo);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const userMenu = [
       getItem(
@@ -69,6 +72,10 @@ const Header = () => {
       setCurrent(e.key);
     };
 
+    const toBackStage = () => {
+      navigate("/back-stage");
+    }
+
     const setUserMenu = () => {
       return <Menu items={userMenu}></Menu>;
     };
@@ -80,11 +87,20 @@ const Header = () => {
         </Col>
         <Col className="nav" span={16}>
           <Menu
+            defaultSelectedKeys={['homepage']}
             mode="horizontal"
             onClick={clickMenu}
             selectedKeys={[current]}
             items={routes}
           />
+          {
+            userInfo.roles !== undefined && userInfo.roles.includes("cinema-admin") && location.pathname !== "/back-stage" ? (
+              <Button className="to-back-btn" onClick={toBackStage} icon={<ExportOutlined />}>
+                后台管理
+              </Button>
+            ) : ""
+          }
+          
         </Col>
         <Col className="user-box" span={4}>
           {loginStatus ? (
