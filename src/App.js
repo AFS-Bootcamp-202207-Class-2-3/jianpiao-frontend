@@ -14,6 +14,7 @@ import HallManagementPage from "./pages/HallManagement/HallManagementPage";
 import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
 import BackStageLayout from "./layout/BackStage/BackStageLayout";
 import FilmManagement from "./pages/FilmManagement/FilmManagementPage";
+import SessionManagementPage from "./pages/SessionManagementPage/SessionManagementPage";
 
 function App() {
   return (
@@ -39,6 +40,11 @@ function App() {
           <Route path="/back-stage/cinema" element={<CinemaManagementPage />} />
           <Route path="/back-stage/film" element={<FilmManagement />} />
         </Route>
+        <Route
+                    path="/back-stage/session"
+                    element={<SessionManagementPage />}
+                  />
+                </Route>
       </Routes>
     </BrowserRouter>
   );
