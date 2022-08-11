@@ -4,18 +4,19 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../api/user";
 import { updateUserInfo } from "../../pages/user/UserSlice";
 
-const PersonalInfo = (props) => {
+const PersonalInfo = () => {
   const { Option } = Select;
-  const { userInfo } = props;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+  console.log(userInfo);
   const handleSubmit = (updatedUser) => {
     setLoading(true);
     updateUser(userInfo.id, updatedUser)
       .then((response) => {
-        let storageUnserInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-        storageUnserInfo = { ...storageUnserInfo, ...response.data.data };
+        const storageUnserInfo = { ...userInfo, ...response.data.data };
         sessionStorage.setItem("userInfo", JSON.stringify(storageUnserInfo));
         dispatch(updateUserInfo(storageUnserInfo));
         setLoading(false);
@@ -39,7 +40,7 @@ const PersonalInfo = (props) => {
           }}
           layout="horizontal"
           onFinish={handleSubmit}
-          initialValues={{ ...userInfo }}
+          initialValues={userInfo}
         >
           <Form.Item label="用户名" name="username">
             <Input disabled />
@@ -54,7 +55,7 @@ const PersonalInfo = (props) => {
           >
             <Input />
           </Form.Item>
-          <Form.Item label="头像" name="photo" valuePropName="fileList">
+          <Form.Item label="头像" name="photo">
             <Input placeholder="请输入图片的地址" />
           </Form.Item>
           <Form.Item label="姓名" name="name">
