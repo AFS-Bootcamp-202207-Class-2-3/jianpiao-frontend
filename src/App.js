@@ -11,6 +11,7 @@ import PickSeat from "./pages/orderPage/PickSeat";
 import Cinema from "./pages/CinemaPage/Cinema";
 import CinemaDetailPage from "./pages/CinemaDetailPage";
 import HallManagementPage from "./pages/HallManagement/HallManagementPage";
+import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/cinemas/:cinemaId" element={<CinemaDetailPage />} />
           <Route path="/cinemas" element={<Cinema />} />
           <Route path="/hall" element={<HallManagementPage />} />
+          <Route path="/cinema-admin" element={<CinemaManagementPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
