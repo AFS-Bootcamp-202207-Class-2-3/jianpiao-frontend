@@ -43,12 +43,19 @@ const LoginCard = (prop) => {
         setInputInvitationCode(e.target.value);
     }
 
+    const [inputCinemaName, setInputCinemaName] = useState('');
+    const onInputCinemaNameChange = (e) => {
+        setInputCinemaName(e.target.value);
+    }
+
     const dispatch = useDispatch();
 
     const onConfirm = () => {
-        const user = {
+        const fromData = {
             username: inputUsername,
-            password: inputPassword
+            password: inputPassword,
+            invitationCode: inputInvitationCode,
+            cinemaName: inputCinemaName
         };
         const loginOrRegisterSuccess = (resp) =>{
 
@@ -74,7 +81,7 @@ const LoginCard = (prop) => {
             }
         }
         if (isLogin) {
-            JPApi("/user/login", "post", user, loginOrRegisterSuccess);
+            JPApi("/user/login", "post", fromData, loginOrRegisterSuccess);
         } else {
             if (inputUsername === '' || inputPassword === '' || inputCheckPassword === '') {
                 alert('请输入用户名、密码和确认密码');
@@ -84,9 +91,9 @@ const LoginCard = (prop) => {
                 alert('邀请码不能为空');
             } else {
                 if(isAdmin){
-                    JPApi("/admin/users/register", "post", user, loginOrRegisterSuccess);
+                    JPApi("/admin/users/register", "post", fromData, loginOrRegisterSuccess);
                 }else{
-                    JPApi("/user/register", "post", user, loginOrRegisterSuccess);
+                    JPApi("/user/register", "post", fromData, loginOrRegisterSuccess);
                 }
             }
         }
@@ -108,7 +115,14 @@ const LoginCard = (prop) => {
                         null :
                         <Input type="password" placeholder='请输入确认密码' onChange={onInputCheckPasswordChange}/>
                     }
-                    {isAdmin && !isLogin? <Input type="text" placeholder='请输入影院验证邀请码' onChange={onInputInvitationCodeChange}/> : null}
+                    {isAdmin && !isLogin?
+                        <Input type="text" placeholder='请输入影院名称' onChange={onInputCinemaNameChange}/> :
+                        null
+                    }
+                    {isAdmin && !isLogin?
+                        <Input type="text" placeholder='请输入影院验证邀请码' onChange={onInputInvitationCodeChange}/> :
+                        null
+                    }
 
                 </div>
                 <div>
