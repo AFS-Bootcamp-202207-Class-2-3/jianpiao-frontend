@@ -94,7 +94,7 @@ const Header = () => {
             items={routes}
           />
           {
-            userInfo.roles !== undefined && userInfo.roles.includes("cinema-admin") && location.pathname !== "/back-stage" ? (
+            userInfo.roles !== undefined && userInfo.roles.includes("cinema-admin") && !location.pathname.includes("/back-stage") ? (
               <Button className="to-back-btn" onClick={toBackStage} icon={<ExportOutlined />}>
                 后台管理
               </Button>

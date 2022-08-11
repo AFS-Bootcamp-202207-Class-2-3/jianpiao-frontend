@@ -13,6 +13,7 @@ import CinemaDetailPage from "./pages/CinemaDetailPage";
 import HallManagementPage from "./pages/HallManagement/HallManagementPage";
 import CinemaManagementPage from "./pages/CinemaManagement/CinemaManagementPage";
 import BackStageLayout from "./layout/BackStage/BackStageLayout";
+import FilmManagement from "./pages/FilmManagement/FilmManagementPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="*" element={<NotFoundPage />} />
           <Route index element={<HomePage />} />
+          <Route path="/homepage" element={<HomePage />} />
           <Route path="/films" element={<Films />} />
           <Route path="/personal" element={<PersonalCenterPage />} />
           <Route path="/films/:id" element={<FilmDetailPage />} />
@@ -29,11 +31,13 @@ function App() {
           <Route path="/pick-seat" element={<PickSeat />} />
           <Route path="/cinemas/:cinemaId" element={<CinemaDetailPage />} />
           <Route path="/cinemas" element={<Cinema />} />
-          <Route path="/hall" element={<HallManagementPage />} />
-          <Route path="/cinema-admin" element={<CinemaManagementPage />} />
         </Route>
         <Route path="/back-stage" element={<BackStageLayout />}>
           <Route path="*" element={<NotFoundPage />} />
+          <Route index element={<CinemaManagementPage />} />
+          <Route path="/back-stage/hall" element={<HallManagementPage />} />
+          <Route path="/back-stage/cinema" element={<CinemaManagementPage />} />
+          <Route path="/back-stage/film" element={<FilmManagement />} />
         </Route>
       </Routes>
     </BrowserRouter>

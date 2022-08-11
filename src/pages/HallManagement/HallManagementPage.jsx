@@ -41,12 +41,6 @@ export default function HallManagementPage() {
 
     return (
         <div>
-            <div style={{ width: 256, float: "left" }} > </div>
-
-            <div style={{ alignItems: "center", width: 56, display: "inline-block" }} > </div>
-
-            <div style={{ width: 700, display: "inline-block" }} >
-                <div style={{ width: 700, display: "inline-block" }} ></div>
                 <Button type="primary" onClick={showModal}>
                     添加影厅
                 </Button>
@@ -80,7 +74,6 @@ export default function HallManagementPage() {
                         )}
                     />
                 </Table>
-            </div>
         </div>
     )
 }

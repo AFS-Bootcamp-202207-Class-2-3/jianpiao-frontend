@@ -33,11 +33,8 @@ export default function CinemaManagementPage() {
 
     return (
         <div>
-            <div style={{ width: 256, float: "left" }} > </div>
 
-            <div style={{ alignItems: "center", width: 356, display: "inline-block" }} > </div>
-
-            <div style={{ width: 700, display: "inline-block" }} >
+            <div style={{ width: '100%', display: "inline-block" }} >
 
                 <h1>
                     影院名称：

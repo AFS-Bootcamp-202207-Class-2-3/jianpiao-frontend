@@ -14,3 +14,7 @@
         margin: 0 8%;
     }
 }
+.back-stage-content {
+    padding: 20px 30px;
+    flex: 1;
+}
