@@ -1,7 +1,7 @@
 import axios from "axios";
 import { message } from "antd";
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import loadingGif from "../assets/loading.gif";
 
 let baseURL = "http://localhost:8080/";
@@ -27,10 +27,8 @@ function showLoading() {
 
     dom.setAttribute("id", "loading");
     document.body.appendChild(dom);
-    ReactDOM.render(
-      <img src={loadingGif} alt="" className="loading-gif" />,
-      dom
-    );
+    const root = ReactDOM.createRoot(document.getElementById("loading"));
+    root.render(<img src={loadingGif} alt="" className="loading-gif" />);
   }
   requestCount++;
 }
