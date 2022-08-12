@@ -19,6 +19,7 @@ const FilmTicket = (props) => {
       {totalPrice ? <div className="item">票价 : ￥{totalPrice} </div> : ""}
       <div className="qrCode">
         <QRCode value={JSON.stringify(props.ticketInfo)} />
+        <div style={{color: "red", fontSize: "12px", textAlign: "center"}}>凭此二维码入场</div>
       </div>
     </div>
   );

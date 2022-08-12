@@ -12,10 +12,17 @@ const HomePage = () => {
     const navigate = useNavigate();
     const [films, setfilms] = useState([]);
 
+    const filterFilm = (films) => {
+        const filterFilms = films.sort((item1, item2) => {
+            return (item2.score === null ? 0 : item2.score) - (item1.score === null ? 0 : item1.score);
+        });
+        return filterFilms.splice(0, 12);
+    }
+
     useEffect(() => {
         const getFilms = async () => {
             const res = await getAllFilms();
-            setfilms(res.data.films);
+            setfilms(filterFilm(res.data.films));
         };
         getFilms();
     }, []);
