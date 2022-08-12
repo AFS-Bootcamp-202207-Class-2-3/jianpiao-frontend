@@ -1,7 +1,8 @@
 import axios from "axios";
-import { Spin, message } from "antd";
+import { message } from "antd";
 import React from "react";
 import ReactDOM from "react-dom";
+import loadingGif from "../assets/loading.gif";
 
 let baseURL = "http://localhost:8080/";
 const env = JSON.stringify(process.env);
@@ -26,7 +27,10 @@ function showLoading() {
 
     dom.setAttribute("id", "loading");
     document.body.appendChild(dom);
-    ReactDOM.render(<Spin tip="加载中..." size="large" />, dom);
+    ReactDOM.render(
+      <img src={loadingGif} alt="" className="loading-gif" />,
+      dom
+    );
   }
   requestCount++;
 }
