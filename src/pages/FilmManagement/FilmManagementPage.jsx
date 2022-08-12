@@ -78,6 +78,7 @@ export default function FilmManagementPage(props) {
                     film.status = "showing";
                     setfilms([film, ...films]);
                     formRef.current.resetFields();
+                    getCinemaFilms();
                 }
             })
         } else {
