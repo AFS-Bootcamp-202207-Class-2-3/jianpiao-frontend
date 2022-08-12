@@ -1,35 +1,30 @@
-import { Button, Form, Input, message, Select, Spin } from "antd";
-import React, { useState } from "react";
+import { Button, Form, Input, message, Select } from "antd";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../api/user";
 import { updateUserInfo } from "../../pages/user/UserSlice";
 
 const PersonalInfo = () => {
   const { Option } = Select;
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const userInfo = JSON.parse(localStorage.getItem("jpUserInfo"));
 
   const handleSubmit = (updatedUser) => {
-    setLoading(true);
     updateUser(userInfo.id, updatedUser)
       .then((response) => {
         const storageUnserInfo = { ...userInfo, ...response.data.data };
         localStorage.setItem("jpUserInfo", JSON.stringify(storageUnserInfo));
         dispatch(updateUserInfo(storageUnserInfo));
-        setLoading(false);
         message.success("修改成功");
       })
       .catch(() => {
         message.error("修改失败");
-        setLoading(false);
       });
   };
 
   return (
     <div>
-      <Spin spinning={loading}>
         <Form
           labelCol={{
             span: 2,
@@ -45,6 +40,9 @@ const PersonalInfo = () => {
             <Input disabled />
           </Form.Item>
           <Form.Item label="新密码" name="password">
+            <Input type="password" />
+          </Form.Item>
+          <Form.Item label="确认密码">
             <Input type="password" />
           </Form.Item>
           <Form.Item
@@ -87,7 +85,6 @@ const PersonalInfo = () => {
             </Button>
           </Form.Item>
         </Form>
-      </Spin>
     </div>
   );
 };

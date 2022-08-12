@@ -1,5 +1,5 @@
 
-.film-list img{
+.film-list img {
     width: 180px;
     height: 250px;
     margin-bottom: 10px;
@@ -9,6 +9,13 @@
     margin: 0;
     display: flex;
     justify-content: center;
+    width: 230px;
+    height: 360px;
+}
+
+.film-list .film-item .film-img:hover {
+    width: 200px;
+    height: 280px;
 }
 
 .film-list .film-info {
